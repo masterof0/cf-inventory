@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 const products = ref(null)
+const changes = ref(false)
 
 onMounted(async () => {
     try {
@@ -13,7 +14,6 @@ onMounted(async () => {
     }
 })
 
-// ToDo create function to write changes to DB
 const writeChanges = async () => {
     // console.log(products.value);
     products.value.forEach(async product => {
@@ -21,17 +21,19 @@ const writeChanges = async () => {
         // console.log(url);
         await fetch(url);
     }); 
-    // const updates = await fetch('/api/updates?sacks=1');
+    changes.value = false
 }
 
 const incQty = (index) => {
     // console.log(products.value[index].Qty);
     products.value[index].Qty = products.value[index].Qty +=1
+    changes.value = true
 }
 
 const decQty = (index) => {
     // console.log(products.value[index].Qty);
     products.value[index].Qty = products.value[index].Qty -=1
+    changes.value = true
 }
 </script>
 
@@ -53,7 +55,7 @@ const decQty = (index) => {
                 </tr>
             </tbody>
         </table>
-        <button @click="writeChanges">Submit changes</button>
+        <button :disabled="!changes" @click="writeChanges">Submit changes</button>
     </main>
 </template>
 
