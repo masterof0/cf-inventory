@@ -17,7 +17,7 @@ onMounted(async () => {
 const writeChanges = async () => {
     // console.log(products.value);
     products.value.forEach(async product => {
-        const url = `/api/updates?${product.Name}=${product.Qty}`
+        const url = `/api/updates?${product.ID}=${product.Qty}`
         // console.log(url);
         await fetch(url);
     }); 

@@ -22,9 +22,9 @@ export default {
 			// console.log(params);
 			params.forEach(async (value, key) => {
 				// console.log(key, value);
-				// console.log(`UPDATE NxStage SET Qty = ${value} WHERE Name = ${key}`)
+				console.log(`UPDATE NxStage SET Qty = ${value} WHERE Name = ${key}`)
 				const { results } = await env.DB.prepare(
-					'UPDATE NxStage SET Qty = ? WHERE Name = ?'
+					"UPDATE NxStage SET Qty = ? WHERE ID = ?"
 				).bind(value, key).run()
 			});
 			return new Response(null, { status: 200 });
