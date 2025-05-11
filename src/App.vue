@@ -8,7 +8,7 @@ const name = ref('Unknown')
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/j4atx-trans-logo.svg" width="350" height="350" />
+    <img alt="Vue logo" class="logo" src="@/assets/j4atx-blue-logo.svg" width="350" height="350" />
 
     <div class="wrapper">
       <nav>
