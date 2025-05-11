@@ -20,13 +20,12 @@ export default {
 
 		if (pathname === "/api/updates") {
 			// console.log(params);
-			params.forEach(async (value, key) => {
-				// console.log(key, value);
-				console.log(`UPDATE NxStage SET Qty = ${value} WHERE ID = ${key}`)
-				const { results } = await env.DB.prepare(
+			for (const [key, value] of params.entries()) {
+				console.log(`UPDATE NxStage SET Qty = ${value} WHERE ID = ${key}`);
+				await env.DB.prepare(
 					"UPDATE NxStage SET Qty = ? WHERE ID = ?"
-				).bind(value, key).run()
-			});
+				).bind(value, key).run();
+			}
 			return new Response(null, { status: 200 });
 		}
 
