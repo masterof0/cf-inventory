@@ -63,6 +63,9 @@ const decQty = (index) => {
 th {
     text-align: left;
 }
+th,td {
+    padding: 5px;
+}
 table, th, td {
     border: 1px solid white;
     border-collapse: collapse;
