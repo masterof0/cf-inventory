@@ -14,4 +14,14 @@ app.get('/api/products', async (c) => {
   return c.json(products)
 })
 
+app.post('/api/products', async (c) => {
+  const query = c.req.query()
+  for (const [key, value] of Object.entries(query)) {
+    await c.env.DB.prepare(
+					"UPDATE NxStage SET Qty = ? WHERE Name = ?"
+				).bind(value, key).run();
+  }
+  return new Response(null, { status: 200 });
+})
+
 export default app
