@@ -40,7 +40,7 @@ const decQty = (index) => {
 <template>
     <main>
         <div>
-            <table>
+            <v-table>
                 <tbody>
                     <tr>
                         <th><h2>Part</h2></th>
@@ -50,10 +50,10 @@ const decQty = (index) => {
                     <tr v-for="(product, index) in products" :key="index">
                         <td>{{ product.PartNum }}</td>
                         <td>{{  product.Description }}</td>
-                        <td style="text-align: right;">{{ product.Qty }} ({{ product.Qty * product.BoxQty }}) <button class="button" style="background: green;" @click="incQty(index)">+</button><button class="button" style="background: red; " @click="decQty(index)">-</button></td>
+                        <td style="text-align: right;">{{ product.Qty }} ({{ product.Qty * product.BoxQty }}) <v-btn class="button" style="background: green;" @click="incQty(index)">+</v-btn><v-btn class="button" style="background: red; " @click="decQty(index)">-</v-btn></td>
                     </tr>
                 </tbody>
-            </table>
+            </v-table>
         </div>
         <div style="margin: 10px;">
             <v-btn :disabled="!changes" @click="writeChanges">Submit changes</v-btn>
