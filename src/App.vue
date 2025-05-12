@@ -12,7 +12,7 @@ const name = ref('Unknown')
 
     <div class="wrapper">
       <nav>
-        <RouterLink class="rtr-link" to="/">Products</RouterLink> | 
+        <RouterLink class="rtr-link" to="/">Products</RouterLink> |
         <RouterLink class="rtr-link" to="/about">About</RouterLink>
       </nav>
     </div>
