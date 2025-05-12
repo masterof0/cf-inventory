@@ -1,39 +1,43 @@
 img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
 }
 
 .wrapper {
-    text-align: center;
+	text-align: center;
 }
 
 /* Table formatting */
 table {
-    width: 100%;
+	width: 100%;
 }
-table, th, td {
-    border: 1px solid white;
-    border-collapse: collapse;
+
+table,
+th,
+td {
+	border: 1px solid white;
+	border-collapse: collapse;
 }
 
 th {
-    text-align: left;
+	text-align: left;
 }
 
-th,td {
-    padding: 5px;
+th,
+td {
+	padding: 5px;
 }
 
 /* Button formatting */
 .button {
-    width: 30px;
-    margin: 5px;
-    padding: 5px;
+	width: 30px;
+	margin: 5px;
+	padding: 5px;
 }
 
 /* Router Links */
 .rtr-link {
-    margin: 10px;
+	margin: 10px;
 }
