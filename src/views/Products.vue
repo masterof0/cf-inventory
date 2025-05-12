@@ -39,35 +39,29 @@ const decQty = (index) => {
 
 <template>
     <main>
-        <!-- <h2>Products object:</h2>
-        <p>{{ products }}</p> -->
-        <table style="width: 100%">
-            <tbody>
-                <tr>
-                    <th><h2 style="width: 25%;">Part</h2></th>
-                    <th><h2>Description</h2></th>
-                    <th style="text-align: center; width: 25%;"><h2>Quantity</h2></th>
-                </tr>
-                <tr v-for="(product, index) in products" :key="index">
-                    <td>{{ product.PartNum }}</td>
-                    <td>{{  product.Description }}</td>
-                    <td style="text-align: right;">{{ product.Qty }} ({{ product.Qty * product.BoxQty }}) <button style="background: green;" @click="incQty(index)">Inc</button><button style="background: red;" @click="decQty(index)">Dec</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <button :disabled="!changes" @click="writeChanges">Submit changes</button>
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th><h2>Part</h2></th>
+                        <th><h2>Description</h2></th>
+                        <th style="text-align: center;"><h2>Quantity</h2></th>
+                    </tr>
+                    <tr v-for="(product, index) in products" :key="index">
+                        <td>{{ product.PartNum }}</td>
+                        <td>{{  product.Description }}</td>
+                        <td style="text-align: right;">{{ product.Qty }} ({{ product.Qty * product.BoxQty }}) <button class="button" style="background: green;" @click="incQty(index)">+</button><button class="button" style="background: red; " @click="decQty(index)">-</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin: 10px;">
+            <v-btn :disabled="!changes" @click="writeChanges">Submit changes</v-btn>
+        </div>
+        
     </main>
 </template>
 
-<style scoped>
-th {
-    text-align: left;
-}
-th,td {
-    padding: 5px;
-}
-table, th, td {
-    border: 1px solid white;
-    border-collapse: collapse;
-}
+<style>
+@import '@/assets/products.css';
 </style>
