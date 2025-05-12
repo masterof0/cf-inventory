@@ -6,7 +6,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "cf-inventory",
 	"compatibility_date": "2025-05-10",
-	"main": "server/index.js",
+	"main": "server/index.ts",
 	"assets": {
 		"not_found_handling": "single-page-application"
 	},
