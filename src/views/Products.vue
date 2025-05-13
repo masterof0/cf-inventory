@@ -20,7 +20,7 @@ const writeChanges = () => {
         const url = `/api/products?${product.Name}=${product.Qty}`
         // console.log(url);
         await fetch(url, {
-            method: "POST"
+            method: "PUT"
         });
     }); 
     changes.value = false

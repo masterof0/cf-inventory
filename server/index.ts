@@ -14,7 +14,7 @@ app.get('/api/products', async (c) => {
   return c.json(products)
 })
 
-app.post('/api/products', async (c) => {
+app.put('/api/products', async (c) => {
   const query = c.req.query()
   for (const [key, value] of Object.entries(query)) {
     await c.env.DB.prepare(
