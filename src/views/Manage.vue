@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 const products = ref(null)
+const cardHidden = ref(false)
 
 onMounted(async () => {
 	try {
@@ -12,17 +13,22 @@ onMounted(async () => {
 		console.log(error)
 	}
 })
+
+const showCard = () => {
+	cardHidden.value = !cardHidden.value
+}
 </script>
 
 <template>
 	<div>
-		<v-container fluid width="750">
+		<v-container width="750">
 			<v-row class="cell">
 				<v-col cols="2">Part Number</v-col>
 				<v-col cols="1">Name</v-col>
 				<v-col>Description</v-col>
 				<v-col cols="1" class="center">Qty</v-col>
 				<v-col cols="1" class="center">Box Qty</v-col>
+				<v-col cols="2" class="center" :hidden="!cardHidden">Edit</v-col>
 			</v-row>
 			<v-row class="cell" v-for="( product, index ) in products" :key="index">
 				<v-col cols="2">{{ product.PartNum }}</v-col>
@@ -30,7 +36,26 @@ onMounted(async () => {
 				<v-col>{{ product.Description }}</v-col>
 				<v-col cols="1" class="center">{{ product.Qty }}</v-col>
 				<v-col cols="1" class="center">{{ product.BoxQty }}</v-col>
+				<v-col cols="2" class="center" :hidden="!cardHidden"><v-btn class="btn">Edit</v-btn></v-col>
 			</v-row>
+            <v-row>
+                <v-col class="center" cols="4">
+                    <v-btn class="btn" @click="showCard">Add/Edit Products</v-btn>
+                </v-col>
+            </v-row>
+		</v-container>
+		</br>
+		<v-container width="500" :hidden="!cardHidden">
+			<v-card>
+				<v-toolbar color="red"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
+			</v-card>
+			<v-card-text>
+				<v-text-field label="Part Number"></v-text-field>
+				<v-text-field label="Name" ></v-text-field>
+				<v-text-field label="Description"></v-text-field>
+				<v-text-field label="Qty"></v-text-field>
+				<v-text-field label="BoxQty"></v-text-field>
+			</v-card-text>
 		</v-container>
 	</div>
 </template>
@@ -47,6 +72,9 @@ onMounted(async () => {
 }
 .center {
 	text-align: center;
+}
+.btn {
+	background-color: red;
 }
 
 </style>
