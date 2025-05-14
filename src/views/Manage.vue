@@ -3,6 +3,9 @@ import { ref, onMounted } from 'vue'
 
 const products = ref(null)
 const cardHidden = ref(false)
+const prodModel = ref({
+	ID: 'new'
+})
 
 onMounted(async () => {
 	try {
@@ -16,6 +19,18 @@ onMounted(async () => {
 
 const showCard = () => {
 	cardHidden.value = !cardHidden.value
+}
+
+const updateProdModel = (p) => {
+	prodModel.value = p
+	console.log(prodModel)
+}
+
+const addEditProduct = () => {
+	prodModel.value.ID = prodModel.value.ID.trim()
+	if (prodModel.value.ID === '' || prodModel.value.ID === 'new') {
+		console.log(prodModel);
+	}
 }
 </script>
 
@@ -36,7 +51,7 @@ const showCard = () => {
 				<v-col>{{ product.Description }}</v-col>
 				<v-col cols="1" class="center">{{ product.Qty }}</v-col>
 				<v-col cols="1" class="center">{{ product.BoxQty }}</v-col>
-				<v-col cols="2" class="center" :hidden="!cardHidden"><v-btn class="btn">Edit</v-btn></v-col>
+				<v-col cols="2" class="center" :hidden="!cardHidden"><v-btn class="btn" @click="updateProdModel(product)">Edit</v-btn></v-col>
 			</v-row>
             <v-row>
                 <v-col class="center" cols="4">
@@ -50,11 +65,15 @@ const showCard = () => {
 				<v-toolbar color="red"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
 			</v-card>
 			<v-card-text>
-				<v-text-field label="Part Number"></v-text-field>
-				<v-text-field label="Name" ></v-text-field>
-				<v-text-field label="Description"></v-text-field>
-				<v-text-field label="Qty"></v-text-field>
-				<v-text-field label="BoxQty"></v-text-field>
+				<!-- <v-form> -->
+					<v-text-field class="bot20mar" v-model="prodModel.ID" label="ID" persistent-hint hint="Set ID to 'new' or leave blank for a new product"></v-text-field>
+					<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
+					<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
+					<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
+					<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
+					<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
+					<v-btn @click="addEditProduct">Add</v-btn>
+				<!-- </v-form> -->
 			</v-card-text>
 		</v-container>
 	</div>
@@ -76,5 +95,10 @@ const showCard = () => {
 .btn {
 	background-color: red;
 }
-
+.hidden {
+	visibility: hidden;
+}
+.bot20mar {
+	margin-bottom: 20px;
+}
 </style>
