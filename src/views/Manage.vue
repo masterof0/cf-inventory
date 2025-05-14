@@ -16,8 +16,8 @@ onMounted(async () => {
 
 <template>
 	<div>
-		<v-container style="text-align: left;" fluid width="750">
-			<v-row>
+		<v-container fluid width="750">
+			<v-row class="cell">
 				<v-col cols="2">Part Number</v-col>
 				<v-col cols="1">Name</v-col>
 				<v-col>Description</v-col>
@@ -36,11 +36,14 @@ onMounted(async () => {
 </template>
 
 <style>
-.v-row:nth-child(1) {
-	background-color: rgb(120,188,187);
+.v-container {
+	text-align: left;
 }
-.v-row:nth-child(even) {
+.cell:nth-child(odd) {
 	background: rgb(172,202,118);
+}
+.cell:nth-child(1) {
+	background: rgb(120,188,187);
 }
 .center {
 	text-align: center;
