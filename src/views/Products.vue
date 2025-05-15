@@ -4,6 +4,8 @@ import { ref, onMounted } from 'vue'
 const products = ref(null)
 const changes = ref(false)
 
+// ToDo implement axios to replace fetch calls
+
 onMounted(async () => {
     try {
         const prods = await fetch('/api/products');

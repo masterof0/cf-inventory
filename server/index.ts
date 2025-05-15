@@ -24,4 +24,29 @@ app.put('/api/products', async (c) => {
   return new Response(null, { status: 200 });
 })
 
+app.post('/api/addedit', async (c) => {
+  const body = await c.req.json()
+  console.log(body.PartNum, body.Name, body.Description, body.qty, body.BoxQty)
+
+  if (typeof body.ID == "number") {
+    const resp = await c.env.DB.prepare( `UPDATE NxStage
+      SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`)
+      .bind(body.PartNum, body.Name, body.Description, body.qty, body.BoxQty. body.ID)
+      .run()
+
+    // return new Response(null, { status: 200 });
+    const ok = resp.success
+    return c.json({ok})
+  } 
+
+  const resp = await c.env.DB.prepare(
+    `INSERT INTO NxStage (PartNum, Name, Description, Qty, BoxQty) VALUES (?, ?, ?, ?, ?) RETURNING *`)
+    .bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty)
+    .run()
+
+  // return new Response(null, { status: 200 });
+  const ok = resp.success
+  return c.json({ok})
+})
+
 export default app

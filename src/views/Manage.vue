@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import axios from 'axios'
 
 const products = ref(null)
 const cardHidden = ref(false)
@@ -7,7 +8,12 @@ const prodModel = ref({
 	ID: 'new'
 })
 
+// ToDo update fetch to use axios
 onMounted(async () => {
+	await reloadProducts()
+})
+
+const reloadProducts = (async () => {
 	try {
 		const prods = await fetch('/api/products')
 		const data = await prods.json()
@@ -26,12 +32,12 @@ const updateProdModel = (p) => {
 	console.log(prodModel)
 }
 
-const addEditProduct = () => {
-	prodModel.value.ID = prodModel.value.ID.trim()
-	if (prodModel.value.ID === '' || prodModel.value.ID === 'new') {
-		console.log(prodModel);
-	}
+const addEditProduct = async () => {
+	const resp = await axios.post('/api/addedit', prodModel.value)
+	await reloadProducts()
 }
+
+
 </script>
 
 <template>
@@ -72,7 +78,7 @@ const addEditProduct = () => {
 					<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
 					<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
 					<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
-					<v-btn @click="addEditProduct">Add</v-btn>
+					<v-btn @click="addEditProduct">{{ (typeof prodModel.ID == "number") ? "Edit" : "Add" }}</v-btn>
 				<!-- </v-form> -->
 			</v-card-text>
 		</v-container>
