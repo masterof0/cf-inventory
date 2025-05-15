@@ -29,11 +29,11 @@ const showCard = () => {
 
 const updateProdModel = (p) => {
 	prodModel.value = p
-	console.log(prodModel)
+	// console.log(prodModel)
 }
 
 const addEditProduct = () => {
-	axios.post('/api/addedit', prodModel.value)
+	axios.post('/api/product', prodModel.value)
 	.then(response => {
 		reloadProducts()
 		// console.log(response.data);

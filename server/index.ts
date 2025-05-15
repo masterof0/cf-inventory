@@ -14,6 +14,7 @@ app.get('/api/products', async (c) => {
   return c.json(products)
 })
 
+// ToDo update to be a batch function
 app.put('/api/products', async (c) => {
   const query = c.req.query()
   for (const [key, value] of Object.entries(query)) {
@@ -24,7 +25,7 @@ app.put('/api/products', async (c) => {
   return new Response(null, { status: 200 });
 })
 
-app.post('/api/addedit', async (c) => {
+app.post('/api/product', async (c) => {
   const body = await c.req.json()
   console.log(body.ID, body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty)
 
