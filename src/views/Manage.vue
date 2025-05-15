@@ -34,17 +34,19 @@ const updateProdModel = (p) => {
 
 const addEditProduct = () => {
 	axios.post('/api/product', prodModel.value)
-	.then(response => {
-		reloadProducts()
-		// console.log(response.data);
-	})
-	.catch(error => {
-		console.error(error);
-	})
+		.then(response => {
+			reloadProducts()
+			// console.log(response.data);
+		})
+		.catch(error => {
+			console.error(error);
+		})
 }
 
 
 </script>
+
+<!-- ToDo redirect to edit window when editing a product -->
 
 <template>
 	<div>
@@ -57,19 +59,20 @@ const addEditProduct = () => {
 				<v-col cols="1" class="center">Box Qty</v-col>
 				<v-col cols="2" class="center" :hidden="!cardHidden">Edit</v-col>
 			</v-row>
-			<v-row class="cell" v-for="( product, index ) in products" :key="index">
+			<v-row class="cell" v-for="(product, index) in products" :key="index">
 				<v-col cols="2">{{ product.PartNum }}</v-col>
 				<v-col cols="1">{{ product.Name }}</v-col>
 				<v-col>{{ product.Description }}</v-col>
 				<v-col cols="1" class="center">{{ product.Qty }}</v-col>
 				<v-col cols="1" class="center">{{ product.BoxQty }}</v-col>
-				<v-col cols="2" class="center" :hidden="!cardHidden"><v-btn class="btn" @click="updateProdModel(product)">Edit</v-btn></v-col>
+				<v-col cols="2" class="center" :hidden="!cardHidden"><v-btn class="btn"
+						@click="updateProdModel(product)">Edit</v-btn></v-col>
 			</v-row>
-            <v-row>
-                <v-col class="center" cols="4">
-                    <v-btn class="btn" @click="showCard">Add/Edit Products</v-btn>
-                </v-col>
-            </v-row>
+			<v-row>
+				<v-col class="center" cols="4">
+					<v-btn class="btn" @click="showCard">Add/Edit Products</v-btn>
+				</v-col>
+			</v-row>
 		</v-container>
 		</br>
 		<v-container width="500" :hidden="!cardHidden">
@@ -78,13 +81,14 @@ const addEditProduct = () => {
 			</v-card>
 			<v-card-text>
 				<!-- <v-form> -->
-					<v-text-field class="bot20mar" v-model="prodModel.ID" label="ID" persistent-hint hint="Set ID to 'new' or leave blank for a new product"></v-text-field>
-					<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
-					<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
-					<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
-					<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
-					<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
-					<v-btn @click="addEditProduct">{{ (typeof prodModel.ID == "number") ? "Edit" : "Add" }}</v-btn>
+				<v-text-field class="bot20mar" v-model="prodModel.ID" label="ID" persistent-hint
+					hint="Set ID to 'new' or leave blank for a new product"></v-text-field>
+				<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
+				<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
+				<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
+				<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
+				<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
+				<v-btn @click="addEditProduct">{{ (typeof prodModel.ID == "number") ? "Edit" : "Add" }}</v-btn>
 				<!-- </v-form> -->
 			</v-card-text>
 		</v-container>
@@ -95,21 +99,27 @@ const addEditProduct = () => {
 .v-container {
 	text-align: left;
 }
+
 .cell:nth-child(odd) {
-	background: rgb(172,202,118);
+	background: rgb(172, 202, 118);
 }
+
 .cell:nth-child(1) {
-	background: rgb(120,188,187);
+	background: rgb(120, 188, 187);
 }
+
 .center {
 	text-align: center;
 }
+
 .btn {
 	background-color: red;
 }
+
 .hidden {
 	visibility: hidden;
 }
+
 .bot20mar {
 	margin-bottom: 20px;
 }
