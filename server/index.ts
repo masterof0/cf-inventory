@@ -26,15 +26,16 @@ app.put('/api/products', async (c) => {
 
 app.post('/api/addedit', async (c) => {
   const body = await c.req.json()
-  console.log(body.PartNum, body.Name, body.Description, body.qty, body.BoxQty)
+  console.log(body.ID, body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty)
 
   if (typeof body.ID == "number") {
     const resp = await c.env.DB.prepare( `UPDATE NxStage
       SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`)
-      .bind(body.PartNum, body.Name, body.Description, body.qty, body.BoxQty. body.ID)
+      .bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty, body.ID)
       .run()
 
     // return new Response(null, { status: 200 });
+    console.log(resp.results)
     const ok = resp.success
     return c.json({ok})
   } 
@@ -45,6 +46,7 @@ app.post('/api/addedit', async (c) => {
     .run()
 
   // return new Response(null, { status: 200 });
+  console.log(resp.results)
   const ok = resp.success
   return c.json({ok})
 })
