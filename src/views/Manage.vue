@@ -32,9 +32,15 @@ const updateProdModel = (p) => {
 	console.log(prodModel)
 }
 
-const addEditProduct = async () => {
-	const resp = await axios.post('/api/addedit', prodModel.value)
-	await reloadProducts()
+const addEditProduct = () => {
+	axios.post('/api/addedit', prodModel.value)
+	.then(response => {
+		reloadProducts()
+		// console.log(response.data);
+	})
+	.catch(error => {
+		console.error(error);
+	})
 }
 
 
