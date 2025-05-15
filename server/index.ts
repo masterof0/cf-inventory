@@ -27,14 +27,6 @@ app.put('/api/products', async (c) => {
 
 app.post('/api/product', async (c) => {
 	const body = await c.req.json()
-	console.log(
-		body.ID,
-		body.PartNum,
-		body.Name,
-		body.Description,
-		body.Qty,
-		body.BoxQty
-	)
 
 	if (typeof body.ID == 'number') {
 		const resp = await c.env.DB.prepare(
@@ -60,10 +52,30 @@ app.post('/api/product', async (c) => {
 	const resp = await c.env.DB.prepare(
 		`INSERT INTO NxStage (PartNum, Name, Description, Qty, BoxQty) VALUES (?, ?, ?, ?, ?) RETURNING *`
 	)
-		.bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty)
+		.bind(
+            body.PartNum, 
+            body.Name, 
+            body.Description, 
+            body.Qty, 
+            body.BoxQty
+        )
 		.run()
 
 	// return new Response(null, { status: 200 });
+	console.log(resp.results)
+	const ok = resp.success
+	return c.json({ ok })
+})
+
+app.delete('/api/delete/:id', async (c) => {
+	const id = await c.req.param('id')
+
+	const resp = await c.env.DB.prepare(
+		`DELETE FROM NxStage WHERE ID = ? RETURNING *`
+	)
+		.bind(id)
+		.run()
+
 	console.log(resp.results)
 	const ok = resp.success
 	return c.json({ ok })

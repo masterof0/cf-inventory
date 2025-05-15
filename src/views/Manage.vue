@@ -44,7 +44,20 @@ const addEditProduct = () => {
 		})
 }
 
-
+const deleteProduct = (p) => {
+	// console.log(p.ID)
+	axios.delete(`/api/delete/${p.ID}`)
+		.then(response => {
+			reloadProducts()
+			// console.log(response.data);
+		})
+		.catch(error => {
+			console.error(error);
+		})
+	prodModel.value = {
+		ID: ''
+	}
+}
 </script>
 
 <!-- ToDo redirect to edit window when editing a product -->
@@ -68,7 +81,7 @@ const addEditProduct = () => {
 				<v-col cols="1" class="center">{{ product.BoxQty }}</v-col>
 				<v-col cols="2" class="center" :hidden="!cardHidden"> 
 					<v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon>
-					<v-icon :icon="mdiDelete" @click=""></v-icon>
+					<v-icon :icon="mdiDelete" @click="deleteProduct(product)"></v-icon>
 				</v-col>
 			</v-row>
 			<v-row>
