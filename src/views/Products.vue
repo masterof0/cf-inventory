@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
 
 const products = ref(null)
 const changes = ref(false)
@@ -48,14 +49,17 @@ const decQty = (index) => {
                 <v-row class="cell">
                     <v-col cols="2">Part</v-col>
                     <v-col>Description</v-col>
-                    <v-col cols="4" class="center">Qty</v-col>
+                    <v-col cols="2" class="center">Qty</v-col>
+                    <v-col cols="2" class="center"></v-col>
                 </v-row>
-                <v-row class="cell" v-for="(product, index) in products" :key="index">
+                <v-row class="cell" align="center" v-for="(product, index) in products" :key="index">
                     <v-col cols="2">{{ product.PartNum }}</v-col>
                     <v-col>{{ product.Description }}</v-col>
-                    <v-col cols="4" style="text-align: right;">{{ product.Qty }} ({{ product.Qty * product.BoxQty }})
-                        <v-btn class="button" style="background: green;" @click="incQty(index)">+</v-btn><v-btn
-                            class="button" style="background: red; " @click="decQty(index)">-</v-btn></v-col>
+                    <v-col cols="2" class="center">{{ product.Qty }} ({{ product.Qty * product.BoxQty }})</v-col>
+                    <v-col cols="2" class="center">
+                        <v-icon :icon="mdiPlusCircle" @click="incQty(index)"></v-icon>
+                        <v-icon :icon="mdiMinusCircle" @click="decQty(index)"></v-icon>
+                    </v-col>
                 </v-row>
                 <v-row class="lastCell">
                     <v-col class="center" cols="3">
@@ -88,5 +92,9 @@ const decQty = (index) => {
 
 .center {
     text-align: center;
+}
+
+.v-icon {
+    margin: 10px;
 }
 </style>

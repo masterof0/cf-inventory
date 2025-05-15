@@ -1,11 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { mdiPencil, mdiDelete } from '@mdi/js'
 
 const products = ref(null)
 const cardHidden = ref(false)
 const prodModel = ref({
-	ID: 'new'
+	ID: ''
 })
 
 // ToDo update fetch to use axios
@@ -51,7 +52,7 @@ const addEditProduct = () => {
 <template>
 	<div>
 		<v-container width="750">
-			<v-row class="cell">
+			<v-row class="cell rounded-t-lg">
 				<v-col cols="2">Part Number</v-col>
 				<v-col cols="1">Name</v-col>
 				<v-col>Description</v-col>
@@ -59,18 +60,20 @@ const addEditProduct = () => {
 				<v-col cols="1" class="center">Box Qty</v-col>
 				<v-col cols="2" class="center" :hidden="!cardHidden">Edit</v-col>
 			</v-row>
-			<v-row class="cell" v-for="(product, index) in products" :key="index">
+			<v-row class="cell" align="center" v-for="(product, index) in products" :key="index">
 				<v-col cols="2">{{ product.PartNum }}</v-col>
 				<v-col cols="1">{{ product.Name }}</v-col>
 				<v-col>{{ product.Description }}</v-col>
 				<v-col cols="1" class="center">{{ product.Qty }}</v-col>
 				<v-col cols="1" class="center">{{ product.BoxQty }}</v-col>
-				<v-col cols="2" class="center" :hidden="!cardHidden"><v-btn class="btn"
-						@click="updateProdModel(product)">Edit</v-btn></v-col>
+				<v-col cols="2" class="center" :hidden="!cardHidden"> 
+					<v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon>
+					<v-icon :icon="mdiDelete" @click=""></v-icon>
+				</v-col>
 			</v-row>
 			<v-row>
 				<v-col class="center" cols="4">
-					<v-btn class="btn" @click="showCard">Add/Edit Products</v-btn>
+					<v-btn class="btn rounded-pill" @click="showCard">Add/Edit Products</v-btn>
 				</v-col>
 			</v-row>
 		</v-container>
@@ -82,7 +85,7 @@ const addEditProduct = () => {
 			<v-card-text>
 				<!-- <v-form> -->
 				<v-text-field class="bot20mar" v-model="prodModel.ID" label="ID" persistent-hint
-					hint="Set ID to 'new' or leave blank for a new product"></v-text-field>
+					hint="Leave ID blank for a new product"></v-text-field>
 				<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
 				<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
 				<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
