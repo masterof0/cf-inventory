@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
 
 const products = ref(null)
 const changes = ref(false)
+
+// ToDo implement axios to replace fetch calls
 
 onMounted(async () => {
     try {
@@ -16,60 +19,82 @@ onMounted(async () => {
 
 const writeChanges = () => {
     // console.log(products.value);
-    products.value.forEach( async product => {
+    products.value.forEach(async product => {
         const url = `/api/products?${product.Name}=${product.Qty}`
         // console.log(url);
         await fetch(url, {
             method: "PUT"
         });
-    }); 
+    });
     changes.value = false
 }
 
 const incQty = (index) => {
     // console.log(products.value[index].Qty);
-    products.value[index].Qty = products.value[index].Qty +=1
+    products.value[index].Qty = products.value[index].Qty += 1
     changes.value = true
 }
 
 const decQty = (index) => {
     // console.log(products.value[index].Qty);
-    products.value[index].Qty = products.value[index].Qty -=1
+    products.value[index].Qty = products.value[index].Qty -= 1
     changes.value = true
 }
 </script>
 
 <template>
     <main>
-        <!-- <h2>Products object:</h2>
-        <p>{{ products }}</p> -->
-        <table style="width: 100%">
-            <tbody>
-                <tr>
-                    <th><h2 style="width: 25%;">Part</h2></th>
-                    <th><h2>Description</h2></th>
-                    <th style="text-align: center; width: 25%;"><h2>Quantity</h2></th>
-                </tr>
-                <tr v-for="(product, index) in products" :key="index">
-                    <td>{{ product.PartNum }}</td>
-                    <td>{{  product.Description }}</td>
-                    <td style="text-align: right;">{{ product.Qty }} ({{ product.Qty * product.BoxQty }}) <button style="background: green;" @click="incQty(index)">Inc</button><button style="background: red;" @click="decQty(index)">Dec</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <button :disabled="!changes" @click="writeChanges">Submit changes</button>
+        <div>
+            <v-container fluid width="750">
+                <v-row class="cell">
+                    <v-col cols="2">Part</v-col>
+                    <v-col>Description</v-col>
+                    <v-col cols="2" class="center">Qty</v-col>
+                    <v-col cols="2" class="center"></v-col>
+                </v-row>
+                <v-row class="cell" align="center" v-for="(product, index) in products" :key="index">
+                    <v-col cols="2">{{ product.PartNum }}</v-col>
+                    <v-col>{{ product.Description }}</v-col>
+                    <v-col cols="2" class="center">{{ product.Qty }} ({{ product.Qty * product.BoxQty }})</v-col>
+                    <v-col cols="2" class="center">
+                        <v-icon :icon="mdiPlusCircle" @click="incQty(index)"></v-icon>
+                        <v-icon :icon="mdiMinusCircle" @click="decQty(index)"></v-icon>
+                    </v-col>
+                </v-row>
+                <v-row class="lastCell">
+                    <v-col class="center" cols="3">
+                        <v-btn :disabled="!changes" @click="writeChanges">Submit changes</v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </div>
     </main>
 </template>
 
-<style scoped>
-th {
+<style>
+/* @import '@/assets/products.css'; */
+
+.v-container {
     text-align: left;
 }
-th,td {
-    padding: 5px;
+
+.cell:nth-child(odd) {
+    background: rgb(172, 202, 118);
 }
-table, th, td {
-    border: 1px solid white;
-    border-collapse: collapse;
+
+.cell:nth-child(1) {
+    background: rgb(120, 188, 187);
+}
+
+.lastCell {
+    background: rgb(120, 188, 187);
+}
+
+.center {
+    text-align: center;
+}
+
+.v-icon {
+    margin: 10px;
 }
 </style>
