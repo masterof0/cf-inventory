@@ -5,7 +5,7 @@ import { ref } from 'vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/j4atx-blue-logo.svg" width="350" height="350" />
+    <img alt="Vue logo" class="logo" src="@/assets/logos/j4atx-blue-logo.svg" width="350" height="350" />
 
     <div class="wrapper">
       <nav>
