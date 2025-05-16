@@ -46,13 +46,13 @@ const decQty = (index) => {
     <main>
         <div>
             <v-container fluid width="750">
-                <v-row class="cell">
+                <v-row class="cell rounded-t-lg">
                     <v-col cols="2">Part</v-col>
                     <v-col>Description</v-col>
                     <v-col cols="2" class="center">Qty</v-col>
                     <v-col cols="2" class="center"></v-col>
                 </v-row>
-                <v-row class="cell" align="center" v-for="(product, index) in products" :key="index">
+                <v-row class="cell align-center" v-for="(product, index) in products" :key="index">
                     <v-col cols="2">{{ product.PartNum }}</v-col>
                     <v-col>{{ product.Description }}</v-col>
                     <v-col cols="2" class="center">{{ product.Qty }} ({{ product.Qty * product.BoxQty }})</v-col>
@@ -61,9 +61,9 @@ const decQty = (index) => {
                         <v-icon :icon="mdiMinusCircle" @click="decQty(index)"></v-icon>
                     </v-col>
                 </v-row>
-                <v-row class="lastCell">
+                <v-row class="lastCell rounded-b-lg align-center">
                     <v-col class="center" cols="3">
-                        <v-btn :disabled="!changes" @click="writeChanges">Submit changes</v-btn>
+                        <v-btn class="btn rounded-pill" :disabled="!changes" @click="writeChanges">Submit changes</v-btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -72,26 +72,8 @@ const decQty = (index) => {
 </template>
 
 <style>
-/* @import '@/assets/products.css'; */
-
-.v-container {
-    text-align: left;
-}
-
-.cell:nth-child(odd) {
-    background: rgb(172, 202, 118);
-}
-
-.cell:nth-child(1) {
-    background: rgb(120, 188, 187);
-}
-
-.lastCell {
-    background: rgb(120, 188, 187);
-}
-
-.center {
-    text-align: center;
+.btn {
+	background-color: red;
 }
 
 .v-icon {

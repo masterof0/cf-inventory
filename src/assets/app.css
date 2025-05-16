@@ -8,3 +8,31 @@ img {
 .wrapper {
 	text-align: center;
 }
+
+.v-container {
+    text-align: left;
+}
+
+.v-row {
+	height: 70px;
+}
+
+.cell:nth-child(odd) {
+    background: rgb(172, 202, 118);
+}
+
+.cell:nth-child(1) {
+    background: rgb(120, 188, 187);
+}
+
+.center {
+	text-align: center;
+}
+
+.lastCell {
+    background: rgb(120, 188, 187);
+}
+
+.btn {
+	background: red;
+}
