@@ -1,27 +1,25 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import d1Axios from '@/services/d1Axios'
 import { mdiPencil, mdiDelete } from '@mdi/js'
 
 const products = ref(null)
 const cardHidden = ref(false)
-const prodModel = ref({
-	ID: ''
-})
+const prodModel = ref({})
 
-// ToDo update fetch to use axios
-onMounted(async () => {
-	await reloadProducts()
-})
-
-const reloadProducts = (async () => {
+const loadProducts = () => {
 	try {
-		const prods = await fetch('/api/products')
-		const data = await prods.json()
-		products.value = data
+		d1Axios.getProducts()
+			.then(response => {
+				products.value = response.data
+			})
 	} catch (error) {
-		console.log(error)
+		console.error(error)
 	}
+}
+
+onMounted(async () => {
+	await loadProducts()
 })
 
 const showCard = () => {
@@ -30,33 +28,24 @@ const showCard = () => {
 
 const updateProdModel = (p) => {
 	prodModel.value = p
-	// console.log(prodModel)
 }
 
 const addEditProduct = () => {
-	axios.post('/api/product', prodModel.value)
-		.then(response => {
-			reloadProducts()
-			// console.log(response.data);
-		})
+	d1Axios.addEditProduct(prodModel.value)
+		.then( loadProducts() )
 		.catch(error => {
 			console.error(error);
 		})
+	prodModel.value = {}
 }
 
 const deleteProduct = (p) => {
-	// console.log(p.ID)
-	axios.delete(`/api/delete/${p.ID}`)
-		.then(response => {
-			reloadProducts()
-			// console.log(response.data);
-		})
+	d1Axios.deleteProduct(p.ID)
+		.then( loadProducts() )
 		.catch(error => {
 			console.error(error);
 		})
-	prodModel.value = {
-		ID: ''
-	}
+	prodModel.value = {}
 }
 </script>
 
@@ -79,7 +68,7 @@ const deleteProduct = (p) => {
 				<v-col>{{ product.Description }}</v-col>
 				<v-col cols="1" class="center">{{ product.Qty }}</v-col>
 				<v-col cols="1" class="center">{{ product.BoxQty }}</v-col>
-				<v-col cols="2" class="center" :hidden="!cardHidden"> 
+				<v-col cols="2" class="center" :hidden="!cardHidden">
 					<v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon>
 					<v-icon :icon="mdiDelete" @click="deleteProduct(product)"></v-icon>
 				</v-col>

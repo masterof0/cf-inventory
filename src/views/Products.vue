@@ -1,42 +1,35 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import d1Axios from '@/services/d1Axios'
 import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
 
 const products = ref(null)
 const changes = ref(false)
 
-// ToDo implement axios to replace fetch calls
-
 onMounted(async () => {
-    try {
-        const prods = await fetch('/api/products');
-        const data = await prods.json();
-        products.value = data
-    } catch (error) {
-        console.log(error);
-    }
+	try {
+		d1Axios.getProducts()
+			.then(response => {
+				products.value = response.data
+			})
+	} catch (error) {
+		console.error(error)
+	}
 })
 
 const writeChanges = () => {
-    // console.log(products.value);
     products.value.forEach(async product => {
-        const url = `/api/products?${product.Name}=${product.Qty}`
-        // console.log(url);
-        await fetch(url, {
-            method: "PUT"
-        });
+        d1Axios.updateProducts(product.Name, product.Qty)
     });
     changes.value = false
 }
 
 const incQty = (index) => {
-    // console.log(products.value[index].Qty);
     products.value[index].Qty = products.value[index].Qty += 1
     changes.value = true
 }
 
 const decQty = (index) => {
-    // console.log(products.value[index].Qty);
     products.value[index].Qty = products.value[index].Qty -= 1
     changes.value = true
 }
