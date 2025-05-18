@@ -10,6 +10,7 @@ import { ref } from 'vue'
     <div class="wrapper">
       <nav>
         <RouterLink class="rtr-link" to="/">Products</RouterLink> |
+        <RouterLink class="rtr-link" to="/login">Login</RouterLink> |
         <RouterLink class="rtr-link" to="/manage">Manage</RouterLink> |
         <RouterLink class="rtr-link" to="/about">About</RouterLink>
       </nav>
