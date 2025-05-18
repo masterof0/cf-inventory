@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { supabase } from '@/services/supabase'
 import Products from '@/views/Products.vue'
 import Manage from '@/views/Manage.vue'
 import Login from '@/views/Login.vue'
@@ -21,6 +22,7 @@ const router = createRouter({
 			path: '/manage',
 			name: 'Manage',
 			component: Manage,
+			meta: { requiresAuth: true },
 		},
 		{
 			path: '/about',
@@ -34,5 +36,26 @@ const router = createRouter({
 		},
 	],
 })
+
+// validate autentication
+router.beforeEach((to, from, next) => {
+	console.log(to.meta.requiresAuth)
+	if (to.meta.requiresAuth) {
+		getUser(next)
+	} else {
+		next()
+	}
+})
+
+// check for valid session
+const getUser = async (next) => {
+	const user = await supabase.auth.getSession()
+	console.log(user.data.session)
+	if (user.data.session == null) {
+		next('/login')
+	} else {
+		next()
+	}
+}
 
 export default router

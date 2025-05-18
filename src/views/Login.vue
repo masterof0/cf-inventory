@@ -1,11 +1,8 @@
 <script setup>
 import { reactive } from 'vue'
-import { createClient } from '@supabase/supabase-js'
-import { mdiLogin } from '@mdi/js';
+import { supabase } from '@/services/supabase'
+import { mdiLogin, mdiLogout } from '@mdi/js';
 
-const supaurl = import.meta.env.VITE_SUPAURL;
-const supaapi = import.meta.env.VITE_SUPAAPI;
-const supabase = createClient(supaurl, supaapi);
 
 const account = reactive({
   email: "",
@@ -27,6 +24,12 @@ const login = async () => {
   account.password = ""
 }
 
+const logout = async () => {
+  await supabase.auth.signOut().catch(error => {
+    console.error(error)
+  })
+}
+
 </script>
 <template>
   <div>
@@ -37,7 +40,7 @@ const login = async () => {
       <v-card-text>
         <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
         <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
-        <v-icon :icon="mdiLogin" @click="login"></v-icon>
+        <v-icon :icon="mdiLogin" @click="login"></v-icon><v-icon :icon="mdiLogout" @click="logout"></v-icon>
       </v-card-text>
     </v-container>
   </div>
