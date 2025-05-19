@@ -30,6 +30,8 @@ const logout = async () => {
   })
 }
 
+// ToDo display successful login/logout
+
 </script>
 <template>
   <div>
@@ -40,8 +42,11 @@ const logout = async () => {
       <v-card-text>
         <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
         <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
-        <v-icon :icon="mdiLogin" @click="login"></v-icon><v-icon :icon="mdiLogout" @click="logout"></v-icon>
       </v-card-text>
+      <v-row justify="space-between">
+        <v-icon :icon="mdiLogin" @click="login"></v-icon>
+        <v-icon :icon="mdiLogout" @click="logout" style="align-items: right;"></v-icon>
+      </v-row>
     </v-container>
   </div>
 </template>
