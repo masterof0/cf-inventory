@@ -27,13 +27,13 @@ const login = () => {
 <template>
     <main>
         <div>
-            <v-container fluid width="750">
-                <v-row class="cell rounded-t-lg">
+            <v-container width="750">
+                <v-row class="cell rounded-t-lg" align="center">
                     <v-col cols="2">Part</v-col>
                     <v-col>Description</v-col>
                     <v-col cols="2" class="center">Qty</v-col>
                 </v-row>
-                <v-row class="cell align-center" v-for="(product, index) in products" :key="index">
+                <v-row class="cell" align="center" v-for="(product, index) in products" :key="index">
                     <v-col cols="2">{{ product.PartNum }}</v-col>
                     <v-col>{{ product.Description }}</v-col>
                     <v-col cols="2" class="center">{{ product.Qty }} ({{ product.Qty * product.BoxQty }})</v-col>
@@ -41,7 +41,7 @@ const login = () => {
                 <v-row class="lastCell rounded-b-lg align-center">
                     <v-col class="center" cols="3"></v-col>
                 </v-row>
-                <v-row justify="start">
+                <v-row align="center" justify="start">
                     <v-icon :icon="mdiLogin" @click="login"></v-icon>
                 </v-row>
             </v-container>
