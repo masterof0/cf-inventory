@@ -1,7 +1,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import d1Axios from '@/services/d1Axios'
-import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
+import { mdiLogin } from '@mdi/js';
+
+const router = useRouter()
 
 const products = ref(null)
 
@@ -15,6 +18,10 @@ onMounted(async () => {
         console.error(error)
     }
 })
+
+const login = () => {
+    router.push({ name: "Manage" })
+}
 </script>
 
 <template>
@@ -33,6 +40,9 @@ onMounted(async () => {
                 </v-row>
                 <v-row class="lastCell rounded-b-lg align-center">
                     <v-col class="center" cols="3"></v-col>
+                </v-row>
+                <v-row justify="start">
+                    <v-icon :icon="mdiLogin" @click="login"></v-icon>
                 </v-row>
             </v-container>
         </div>
