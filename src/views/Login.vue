@@ -27,12 +27,6 @@ const login = async () => {
   account.password = ""
 }
 
-const logout = async () => {
-  await supabase.auth.signOut().catch(error => {
-    console.error(error)
-  })
-}
-
 // ToDo display successful login/logout
 
 </script>
@@ -46,9 +40,8 @@ const logout = async () => {
         <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
         <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
       </v-card-text>
-      <v-row justify="space-between">
+      <v-row justify="start">
         <v-icon :icon="mdiLogin" @click="login"></v-icon>
-        <v-icon :icon="mdiLogout" @click="logout" style="align-items: right;"></v-icon>
       </v-row>
     </v-container>
   </div>
