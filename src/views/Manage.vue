@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router';
 import d1Axios from '@/services/d1Axios'
-import { mdiPlusCircle, mdiMinusCircle, mdiPencil, mdiDelete } from '@mdi/js'
+import { supabase } from '@/services/supabase'
+import { mdiPlusCircle, mdiMinusCircle, mdiPencil, mdiDelete, mdiLogout } from '@mdi/js'
 
+const router = useRouter()
 const products = ref(null)
 const cardHidden = ref(false)
 const prodModel = ref({})
@@ -65,6 +68,15 @@ const decQty = (index) => {
 	products.value[index].Qty = products.value[index].Qty -= 1
 	changes.value = true
 }
+
+const logout = async () => {
+	await supabase.auth.signOut()
+		.then(
+			router.push({ name: "Products" })
+		).catch(error => {
+			console.error(error)
+		})
+}
 </script>
 
 <!-- ToDo redirect to edit window when editing a product -->
@@ -105,7 +117,9 @@ const decQty = (index) => {
 					<v-btn class="btn rounded-pill" :disabled="!changes" @click="writeChanges">Update Quantities</v-btn>
 				</v-col>
 			</v-row>
-			<v-row></v-row>
+			<v-row justify="end">
+				<v-icon :icon="mdiLogout" @click="logout" style="align-items: right;"></v-icon>
+			</v-row>
 		</v-container>
 
 		</br>
