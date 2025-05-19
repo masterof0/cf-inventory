@@ -1,8 +1,10 @@
 <script setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router';
 import { supabase } from '@/services/supabase'
 import { mdiLogin, mdiLogout } from '@mdi/js';
 
+const router = useRouter();
 
 const account = reactive({
   email: "",
@@ -15,7 +17,8 @@ const login = async () => {
     password: account.password,
   })
     .then(data => {
-      console.log(data)
+      // console.log(data)
+      router.push({ name: "Manage" })
     })
     .catch(error => {
       console.error(error)
