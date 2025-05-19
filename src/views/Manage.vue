@@ -98,7 +98,7 @@ const decQty = (index) => {
 			</v-row>
 			<v-row class="lastCell rounded-b-lg align-center">
 				<v-col class="center" cols="4">
-					<v-btn class="btn rounded-pill" @click="showCard">Add/Edit Products</v-btn>
+					<v-btn class="btn rounded-pill" :disabled="changes" @click="showCard">Add/Edit Products</v-btn>
 				</v-col>
 				<v-spacer></v-spacer>
 				<v-col class="center" cols="4">
