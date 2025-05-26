@@ -128,6 +128,8 @@ const logout = async () => {
 				<v-toolbar color="red"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
 			</v-card>
 			<v-card-text>
+				<v-select v-if=products :items="products" item-title="Name" item-text="ID" clearable></v-select>
+				<v-select v-else :items="[]"></v-select>
 				<v-text-field class="bot20mar" v-model="prodModel.ID" label="ID" persistent-hint
 					hint="Leave ID blank for a new product"></v-text-field>
 				<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
