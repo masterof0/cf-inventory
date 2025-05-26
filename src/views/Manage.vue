@@ -7,6 +7,7 @@ import { mdiPlusCircle, mdiMinusCircle, mdiPencil, mdiDelete, mdiLogout } from '
 
 const router = useRouter()
 const products = ref(null)
+const selectedItem = ref(null)
 const cardHidden = ref(false)
 const prodModel = ref({})
 const changes = ref(false)
@@ -31,7 +32,15 @@ const showCard = () => {
 }
 
 const updateProdModel = (p) => {
-	prodModel.value = p
+	if (p) {
+		return prodModel.value = p
+	}
+	prodModel.value = {}
+}
+
+const editProdModel = () => {
+	const result = products.value.find(o => o.Name == selectedItem.value)
+	updateProdModel(result)
 }
 
 const addEditProduct = () => {
@@ -104,7 +113,7 @@ const logout = async () => {
 					<v-icon :icon="mdiMinusCircle" @click="decQty(index)"></v-icon>
 				</v-col>
 				<v-col cols="2" class="center" :hidden="!cardHidden">
-					<v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon>
+					<!-- <v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon> -->
 					<v-icon :icon="mdiDelete" @click="deleteProduct(product)"></v-icon>
 				</v-col>
 			</v-row>
@@ -128,10 +137,11 @@ const logout = async () => {
 				<v-toolbar color="red"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
 			</v-card>
 			<v-card-text>
-				<v-select v-if=products :items="products" item-title="Name" item-text="ID" clearable></v-select>
+				<v-select v-if=products class="mb-5" label="Select" v-model="selectedItem" :items="products"
+					item-title="Name" hint="Leave blank for a new product" persistent-hint clearable
+					@update:modelValue="editProdModel"></v-select>
 				<v-select v-else :items="[]"></v-select>
-				<v-text-field class="bot20mar" v-model="prodModel.ID" label="ID" persistent-hint
-					hint="Leave ID blank for a new product"></v-text-field>
+				<v-text-field readonly v-model="prodModel.ID" label="ID"></v-text-field>
 				<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
 				<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
 				<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
@@ -150,9 +160,5 @@ const logout = async () => {
 
 .hidden {
 	visibility: hidden;
-}
-
-.bot20mar {
-	margin-bottom: 20px;
 }
 </style>
