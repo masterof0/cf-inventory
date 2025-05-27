@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '@/services/supabase'
+import { useUserStore } from '@/stores/userStore'
 import Products from '@/views/Products.vue'
 import Manage from '@/views/Manage.vue'
 import Login from '@/views/Login.vue'
@@ -49,11 +50,13 @@ router.beforeEach((to, from, next) => {
 // check for valid session
 const getUser = async (next) => {
 	const user = await supabase.auth.getSession()
-	if (user.data.session == null) {
-		next('/login')
-	} else {
-		next()
+	const store = useUserStore()
+	if (user.data.session) {
+		await store.addUser(user.data.session.user)
+		return next()
 	}
+	await store.clearSession()
+	next('/login')
 }
 
 export default router

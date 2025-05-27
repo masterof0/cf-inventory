@@ -9,6 +9,10 @@ import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+// Install pinia
+import { createPinia } from 'pinia'
+
+const pinia = createPinia()
 const vuetify = createVuetify({
 	components,
 	directives,
@@ -29,6 +33,7 @@ import router from './router'
 
 const app = createApp(App)
 
+app.use(pinia)
 app.use(router)
 app.use(vuetify)
 
