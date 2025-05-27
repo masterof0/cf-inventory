@@ -39,24 +39,33 @@ const router = createRouter({
 })
 
 // validate autentication
-router.beforeEach((to, from, next) => {
-	if (to.meta.requiresAuth) {
-		getUser(next)
+router.beforeEach(async (to, from, next) => {
+	const user = await supabase.auth.getSession()
+	const store = useUserStore()
+	if (to.meta.requiresAuth && user.data.session) {
+		await store.addUser(user.data.session.user)
+		return next()
+	} else if (to.meta.requiresAuth) {
+		await store.clearSession()
+		return next('/login')
 	} else {
-		next()
+		user.data.session
+			? store.addUser(user.data.session.user)
+			: store.clearSession()
 	}
+	next()
 })
 
 // check for valid session
-const getUser = async (next) => {
-	const user = await supabase.auth.getSession()
-	const store = useUserStore()
-	if (user.data.session) {
-		await store.addUser(user.data.session.user)
-		return next()
-	}
-	await store.clearSession()
-	next('/login')
-}
+// const getUser = async (next) => {
+// 	const user = await supabase.auth.getSession()
+// 	const store = useUserStore()
+// 	if (user.data.session) {
+// 		await store.addUser(user.data.session.user)
+// 		return next()
+// 	}
+// 	await store.clearSession()
+// 	next('/login')
+// }
 
 export default router
