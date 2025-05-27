@@ -1,10 +1,11 @@
 <script setup>
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router';
 import { supabase } from '@/services/supabase'
 import { mdiLogin, mdiLogout } from '@mdi/js';
 
 const router = useRouter();
+const success = ref(true)
 
 const account = reactive({
   email: "",
@@ -17,8 +18,11 @@ const login = async () => {
     password: account.password,
   })
     .then(data => {
-      // console.log(data)
-      router.push({ name: "Manage" })
+      if (data.data.session) {
+        success.value = true
+        return router.push({ name: "Manage" })
+      }
+      success.value = false
     })
     .catch(error => {
       console.error(error)
@@ -35,6 +39,7 @@ const login = async () => {
     <v-container width="500">
       <v-card>
         <v-toolbar color="blue"><v-toolbar-title>Login</v-toolbar-title></v-toolbar>
+        <p :hidden="success" class="text-red">Incorrect username or password</p>
       </v-card>
       <v-card-text>
         <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
