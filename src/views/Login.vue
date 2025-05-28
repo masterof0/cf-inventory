@@ -48,8 +48,8 @@ const login = async () => {
         <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
         <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
       </v-card-text>
-      <v-row justify="start">
-        <v-icon :icon="mdiLogin" @click="login"></v-icon>
+      <v-row>
+        <v-btn rounded="xl" color="red-accent-1" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
       </v-row>
     </v-container>
   </div>
