@@ -1,10 +1,15 @@
-/* @import "tailwindcss"; */
+@import 'tailwindcss';
 
 img {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 40%;
+	width: 400px;
+}
+
+a {
+	color: rgb(163, 163, 183);
+	text-decoration: underline;
 }
 
 .wrapper {
@@ -12,7 +17,7 @@ img {
 }
 
 .v-container {
-    text-align: left;
+	text-align: left;
 }
 
 .v-row {
@@ -20,11 +25,11 @@ img {
 }
 
 .cell:nth-child(odd) {
-    background: rgb(172, 202, 118);
+	background: rgb(172, 202, 118);
 }
 
 .cell:nth-child(1) {
-    background: rgb(120, 188, 187);
+	background: rgb(120, 188, 187);
 }
 
 .center {
@@ -32,5 +37,5 @@ img {
 }
 
 .lastCell {
-    background: rgb(120, 188, 187);
+	background: rgb(120, 188, 187);
 }
