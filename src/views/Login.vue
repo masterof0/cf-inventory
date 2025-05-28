@@ -20,7 +20,10 @@ const login = async () => {
     .then(data => {
       if (data.data.session) {
         success.value = true
-        return router.push({ name: "Manage" })
+        const storedPath = sessionStorage.getItem('redirectPath');
+        router.push(storedPath || '/');
+        sessionStorage.removeItem('redirectPath');
+        return
       }
       success.value = false
     })

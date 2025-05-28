@@ -27,7 +27,7 @@ onMounted(async () => {
 })
 
 const login = () => {
-    router.push({ name: "Manage" })
+    router.push({ name: "Login" })
 }
 
 const logout = async () => {

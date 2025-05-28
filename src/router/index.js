@@ -46,6 +46,7 @@ router.beforeEach(async (to, from, next) => {
 		await store.addUser(user.data.session.user)
 		return next()
 	} else if (to.meta.requiresAuth) {
+		sessionStorage.setItem('redirectPath', to.fullPath)
 		await store.clearSession()
 		return next('/login')
 	} else {
