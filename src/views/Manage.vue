@@ -126,8 +126,9 @@ const logout = async () => {
 					<v-btn class="btn rounded-pill" :disabled="!changes" @click="writeChanges">Update Quantities</v-btn>
 				</v-col>
 			</v-row>
-			<v-row justify="end">
-				<v-icon :icon="mdiLogout" @click="logout" style="align-items: right;"></v-icon>
+			<v-row align="center">
+				<v-btn rounded="xl" color="red-accent-1" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
+				<!-- <v-icon :icon="mdiLogout" @click="logout" style="align-items: right;"></v-icon> -->
 			</v-row>
 		</v-container>
 
