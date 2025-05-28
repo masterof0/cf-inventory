@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import d1Axios from '@/services/d1Axios'
 import { useUserStore } from '@/stores/userStore'
+import { supabase } from '@/services/supabase'
 import { mdiLogin, mdiLogout } from '@mdi/js';
 
 const router = useRouter()
