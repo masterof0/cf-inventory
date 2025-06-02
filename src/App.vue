@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
 </script>
 
 <template>
@@ -10,7 +9,8 @@ import { ref } from 'vue'
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Products</RouterLink> |
-        <RouterLink to="/manage">Manage</RouterLink>
+        <RouterLink to="/manage">Manage</RouterLink> |
+        <RouterLink to="/logs">Logs</RouterLink>
       </nav>
     </div>
   </header>
