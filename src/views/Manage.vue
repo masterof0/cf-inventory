@@ -135,7 +135,7 @@ const logout = async () => {
 		</br>
 		<v-container width="500" :hidden="!cardHidden">
 			<v-card>
-				<v-toolbar color="red"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
+				<v-toolbar class="toolbar"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
 			</v-card>
 			<v-card-text>
 				<v-select v-if=products class="mb-5" label="Select" v-model="selectedItem" :items="products"

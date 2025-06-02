@@ -1,5 +1,3 @@
-import '@/assets/css/app.css'
-
 import { createApp } from 'vue'
 
 // Install vuetify
@@ -30,6 +28,7 @@ const vuetify = createVuetify({
 
 import App from './App.vue'
 import router from './router'
+import './assets/css/app.css'
 
 const app = createApp(App)
 
