@@ -1,15 +1,28 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import { supabase } from '@/services/supabase'
 import { mdiLogin, mdiLogout } from '@mdi/js';
+import { useUserStore } from '@/stores/userStore'
 
 const router = useRouter();
 const success = ref(true)
+const store = useUserStore()
+const authenticated = ref(false)
 
 const account = reactive({
   email: "",
   password: ""
+})
+
+onMounted(async () => {
+  try {
+    if (store.getUser) {
+      authenticated.value = true
+    }
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 const login = async () => {
@@ -34,9 +47,17 @@ const login = async () => {
   account.password = ""
 }
 
+const logout = async () => {
+  await supabase.auth.signOut()
+    .then(
+      authenticated.value = false
+    ).catch(error => {
+      console.error(error)
+    })
+}
 // ToDo display successful login/logout
-
 </script>
+
 <template>
   <div>
     <v-container width="500">
@@ -48,8 +69,15 @@ const login = async () => {
         <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
         <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
       </v-card-text>
-      <v-row>
-        <v-btn rounded="xl" color="red-accent-1" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
+      <v-row align="center">
+        <v-col cols="4" :hidden="authenticated">
+          <v-btn rounded="xl" color="red-accent-1" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
+          <!-- <v-icon :icon="mdiLogin" @click="login"></v-icon> -->
+        </v-col>
+        <v-col cols="4" :hidden="!authenticated">
+          <v-btn rounded="xl" color="red-accent-1" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
+          <!-- <v-icon :icon="mdiLogout" @click=""></v-icon> -->
+        </v-col>
       </v-row>
     </v-container>
   </div>
