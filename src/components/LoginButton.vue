@@ -36,10 +36,12 @@ const logout = async () => {
 <template>
     <v-row align="center">
         <v-col cols="4" :hidden="authenticated">
-            <v-btn rounded="xl" color="red-accent-1" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
+            <v-btn rounded="xl" variant="tonal" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
         </v-col>
         <v-col cols="4" :hidden="!authenticated">
-            <v-btn rounded="xl" color="red-accent-1" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
+            <v-btn rounded="xl" variant="tonal" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
         </v-col>
     </v-row>
 </template>
+
+<style></style>

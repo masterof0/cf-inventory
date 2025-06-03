@@ -43,3 +43,7 @@ a {
 .toolbar {
 	background-color: rgb(120, 188, 187);
 }
+
+.v-btn {
+	background-color: rgb(33, 34, 67);
+}
