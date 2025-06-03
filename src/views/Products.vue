@@ -45,7 +45,7 @@ const logout = async () => {
     <main>
         <div>
             <v-container width="750">
-                <v-row class="cell rounded-t-lg" align="center">
+                <v-row class="cell rounded-t-lg text-h4" align="center">
                     <v-col cols="2">Part</v-col>
                     <v-col>Description</v-col>
                     <v-col cols="2" class="center">Qty</v-col>
