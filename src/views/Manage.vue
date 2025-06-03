@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
 import { mdiPlusCircle, mdiMinusCircle, mdiPencil, mdiDelete, mdiLogout } from '@mdi/js'
-import LoginButton from '@/components/loginButton.vue'
+import LoginButton from '@/components/LoginButton.vue'
 
 const products = ref(null)
 const selectedItem = ref(null)
