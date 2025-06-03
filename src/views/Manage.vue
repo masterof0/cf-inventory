@@ -1,11 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import d1Axios from '@/services/d1Axios'
-import { supabase } from '@/services/supabase'
 import { mdiPlusCircle, mdiMinusCircle, mdiPencil, mdiDelete, mdiLogout } from '@mdi/js'
+import LoginButton from '@/components/loginButton.vue'
 
-const router = useRouter()
 const products = ref(null)
 const selectedItem = ref(null)
 const cardHidden = ref(false)
@@ -77,18 +75,7 @@ const decQty = (index) => {
 	products.value[index].Qty = products.value[index].Qty -= 1
 	changes.value = true
 }
-
-const logout = async () => {
-	await supabase.auth.signOut()
-		.then(
-			router.push({ name: "Products" })
-		).catch(error => {
-			console.error(error)
-		})
-}
 </script>
-
-<!-- ToDo redirect to edit window when editing a product -->
 
 <template>
 	<div>
@@ -126,13 +113,12 @@ const logout = async () => {
 					<v-btn class="btn rounded-pill" :disabled="!changes" @click="writeChanges">Update Quantities</v-btn>
 				</v-col>
 			</v-row>
-			<v-row align="center">
-				<v-btn rounded="xl" color="red-accent-1" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
-				<!-- <v-icon :icon="mdiLogout" @click="logout" style="align-items: right;"></v-icon> -->
-			</v-row>
+			<LoginButton />
 		</v-container>
 
 		</br>
+
+		<!-- ToDo move this to a modal -->
 		<v-container width="500" :hidden="!cardHidden">
 			<v-card>
 				<v-toolbar class="toolbar"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
