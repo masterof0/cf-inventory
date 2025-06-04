@@ -25,7 +25,7 @@ import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
                                     max-width="300" clearable></VDateInput>
                                 <v-text-field label="Subject"></v-text-field>
                                 <v-combobox chips multiple label="Tags"
-                                    :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+                                    :items="['bleeding', 'blood pressure', 'dialysis', 'labs', 'maintenance', 'setup']"
                                     clearable></v-combobox>
                                 <v-textarea label="Notes" auto-grow></v-textarea>
                             </v-form>
