@@ -31,11 +31,6 @@ const router = createRouter({
 			component: Logs,
 			// meta: { requiresAuth: true },
 		},
-		// {
-		// 	path: '/about',
-		// 	name: 'About',
-		// 	component: () => import('../views/AboutView.vue'),
-		// },
 		{
 			path: '/:pathMatch(.*)*',
 			name: 'NotFound',
