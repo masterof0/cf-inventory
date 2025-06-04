@@ -1,0 +1,10 @@
+-- Migration number: 0003 	 2025-06-04T00:21:32.854Z
+
+DROP TABLE IF EXISTS Logs;
+CREATE TABLE Logs (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT, 
+    Date DATE NOT NULL, 
+    Subject TEXT NOT NULL, 
+    Tags TEXT, 
+    Notes TEXT 
+);
