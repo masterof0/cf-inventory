@@ -1,7 +1,11 @@
 <script setup>
+import { ref } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 import LoginButton from '@/components/LoginButton.vue'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
+
+const log = ref({})
+const items = ['bleeding', 'blood pressure', 'dialysis', 'labs', 'maintenance', 'setup']
 
 </script>
 
@@ -20,14 +24,13 @@ import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
                             Logs
                         </v-expansion-panel-title>
                         <v-expansion-panel-text>
-                            <v-form>
-                                <VDateInput label="Select Date" prepend-icon="" prepend-inner-icon="$calendar"
-                                    max-width="300" clearable></VDateInput>
-                                <v-text-field label="Subject"></v-text-field>
-                                <v-combobox chips multiple label="Tags"
-                                    :items="['bleeding', 'blood pressure', 'dialysis', 'labs', 'maintenance', 'setup']"
-                                    clearable></v-combobox>
-                                <v-textarea label="Notes" auto-grow></v-textarea>
+                            <v-form @submit.prevent="">
+                                <VDateInput v-model="log.date" label="Select Date" prepend-icon=""
+                                    prepend-inner-icon="$calendar" max-width="300" clearable></VDateInput>
+                                <v-text-field v-model="log.subject" label="Subject"></v-text-field>
+                                <v-combobox chips multiple v-model="log.tags" label="Tags" :items='items' clearable
+                                    hide-selected></v-combobox>
+                                <v-textarea v-model="log.notes" label="Notes" auto-grow></v-textarea>
                             </v-form>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
