@@ -59,8 +59,8 @@ const logout = async () => {
 </script>
 
 <template>
-  <div>
-    <v-container width="500">
+  <div class="w-xl">
+    <v-container>
       <v-card>
         <v-toolbar color="blue"><v-toolbar-title>Login</v-toolbar-title></v-toolbar>
         <p :hidden="success" class="text-red">Incorrect username or password</p>

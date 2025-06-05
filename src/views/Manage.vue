@@ -78,8 +78,8 @@ const decQty = (index) => {
 </script>
 
 <template>
-	<div>
-		<v-container width="750">
+	<div class="justify-items-center w-3xl">
+		<v-container>
 			<v-row class="cell rounded-t-lg" style="height: 70px;">
 				<v-col cols="2">Part Number</v-col>
 				<v-col cols="1">Name</v-col>
@@ -87,7 +87,7 @@ const decQty = (index) => {
 				<v-col cols="1" class="center">Qty</v-col>
 				<v-col cols="1" class="center">Box Qty</v-col>
 				<v-col cols="2" class="center"></v-col>
-				<v-col cols="2" class="center" :hidden="!cardHidden">Edit</v-col>
+				<!-- <v-col cols="2" class="center" :hidden="!cardHidden">Edit</v-col> -->
 			</v-row>
 			<v-row class="cell align-center" v-for="(product, index) in products" :key="index">
 				<v-col cols="2">{{ product.PartNum }}</v-col>
@@ -99,10 +99,10 @@ const decQty = (index) => {
 					<v-icon :icon="mdiPlusCircle" @click="incQty(index)"></v-icon>
 					<v-icon :icon="mdiMinusCircle" @click="decQty(index)"></v-icon>
 				</v-col>
-				<v-col cols="2" class="center" :hidden="!cardHidden">
-					<!-- <v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon> -->
-					<v-icon :icon="mdiDelete" @click="deleteProduct(product)"></v-icon>
-				</v-col>
+				<!-- <v-col cols="2" class="center" :hidden="!cardHidden"> -->
+				<!-- <v-icon :icon="mdiPencil" @click="updateProdModel(product)"></v-icon> -->
+				<!-- <v-icon :icon="mdiDelete" @click="deleteProduct(product)"></v-icon>
+				</v-col> -->
 			</v-row>
 			<v-row class="lastCell rounded-b-lg align-center">
 				<v-col class="center" cols="4">
@@ -119,24 +119,29 @@ const decQty = (index) => {
 		</br>
 
 		<!-- ToDo move this to a modal -->
-		<v-container width="500" :hidden="!cardHidden">
-			<v-card>
-				<v-toolbar class="toolbar"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
-			</v-card>
-			<v-card-text>
-				<v-select v-if=products class="mb-5" label="Select" v-model="selectedItem" :items="products"
-					item-title="Name" hint="Leave blank for a new product" persistent-hint clearable
-					@update:modelValue="editProdModel"></v-select>
-				<v-select v-else :items="[]"></v-select>
-				<v-text-field readonly v-model="prodModel.ID" label="ID"></v-text-field>
-				<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
-				<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
-				<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
-				<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
-				<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
-				<v-btn @click="addEditProduct">{{ (typeof prodModel.ID == "number") ? "Edit" : "Add" }}</v-btn>
-			</v-card-text>
-		</v-container>
+		<div class="w-xl">
+			<v-container :hidden="!cardHidden">
+				<v-card>
+					<v-toolbar class="toolbar"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
+				</v-card>
+				<v-card-text>
+					<v-select v-if=products class="mb-5" label="Select" v-model="selectedItem" :items="products"
+						item-title="Name" hint="Leave blank for a new product" persistent-hint clearable
+						@update:modelValue="editProdModel"></v-select>
+					<v-select v-else :items="[]"></v-select>
+					<v-text-field readonly v-model="prodModel.ID" label="ID"></v-text-field>
+					<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
+					<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
+					<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
+					<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
+					<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
+					<v-row justify="space-between">
+						<v-btn @click="addEditProduct">{{ (typeof prodModel.ID == "number") ? "Edit" : "Add" }}</v-btn>
+						<v-icon :icon="mdiDelete" @click="deleteProduct(prodModel)"></v-icon>
+					</v-row>
+				</v-card-text>
+			</v-container>
+		</div>
 	</div>
 </template>
 
