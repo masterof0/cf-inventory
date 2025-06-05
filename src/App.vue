@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logos/j4atx-blue-logo.svg" width="350" height="350" />
 
-    <div class="wrapper">
+    <div class="wrapper ma-4">
       <nav>
         <RouterLink to="/">Products</RouterLink> |
         <RouterLink to="/manage">Manage</RouterLink> |

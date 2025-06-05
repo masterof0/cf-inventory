@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
-import { mdiPlusCircle, mdiMinusCircle, mdiPencil, mdiDelete, mdiLogout } from '@mdi/js'
+import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
 import LoginButton from '@/components/LoginButton.vue'
 
 const products = ref(null)
@@ -131,9 +131,12 @@ const decQty = (index) => {
 					<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
 					<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
 					<v-row class="pl-2 pr-2" justify="space-between">
-						<v-btn class="w-24 " @click="addEditProduct">{{ (typeof prodModel.ID == "number") ? "Edit"
+						<v-btn class="w-24 rounded-pill" variant="tonal" @click="addEditProduct">{{ (typeof prodModel.ID
+							== "number")
+							? "Edit"
 							: "Add" }}</v-btn>
-						<v-btn class="w-24" @click="deleteProduct(prodModel)">Delete</v-btn>
+						<v-btn class="w-24i rounded-pill" variant="tonal"
+							@click="deleteProduct(prodModel)">Delete</v-btn>
 					</v-row>
 				</v-card-text>
 			</v-container>
