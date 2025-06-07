@@ -76,10 +76,15 @@ app.delete('/api/product/:id', async (c) => {
 	return c.json({ ok })
 })
 
-app.get('/api/logs')
+app.get('/api/logs', async (c) => {
+	const resp = await c.env.DB.prepare('select * from logs;').all()
+	const logs = resp.results
+
+	return c.json(logs)
+})
+
 app.post('/api/log', async (c) => {
 	const body = await c.req.json()
-	console.log(body)
 
 	const resp = await c.env.DB.prepare(
 		`INSERT INTO Logs (Date, Subject, Tags, Notes) VALUES (?, ?, ?, ?) RETURNING *`,

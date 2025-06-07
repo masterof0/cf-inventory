@@ -18,6 +18,10 @@ export default {
 		return axios.patch(`/api/product?${name}=${qty}`)
 	},
 
+	getLogs() {
+		return axios.get('/api/logs')
+	},
+
 	addLog(l) {
 		return axios.post('/api/log', l)
 	},
