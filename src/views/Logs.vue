@@ -21,12 +21,11 @@ const addLog = () => {
 
 </script>
 
+<!-- ToDo allow viewing logs without authentication
+ToDo authenticate prior to adding logs -->
+
 <template>
     <v-container>
-        <!-- <v-toolbar class="toolbar rounded-t-lg" height="70">
-                    <v-toolbar-title>Logs</v-toolbar-title>
-                    <v-btn :icon="mdiFileDocumentPlus"></v-btn>
-                </v-toolbar> -->
         <v-expansion-panels>
             <v-expansion-panel>
                 <v-expansion-panel-title class="toolbar rounded=t=lg text-h5" :expand-icon="mdiFileDocumentPlus"
