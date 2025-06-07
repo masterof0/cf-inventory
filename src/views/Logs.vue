@@ -5,7 +5,11 @@ import LoginButton from '@/components/LoginButton.vue'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
 
 const log = ref({})
-const items = ['bleeding', 'blood pressure', 'dialysis', 'labs', 'maintenance', 'setup']
+const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
+
+const addLog = () => {
+    console.log(log.value);
+}
 
 </script>
 
