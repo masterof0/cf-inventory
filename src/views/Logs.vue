@@ -29,6 +29,7 @@ const items = ['bleeding', 'blood pressure', 'dialysis', 'labs', 'maintenance', 
                         <v-combobox chips multiple v-model="log.tags" label="Tags" :items='items' clearable
                             hide-selected></v-combobox>
                         <v-textarea v-model="log.notes" label="Notes" auto-grow></v-textarea>
+                        <v-btn class="btn rounded-pill" variant="tonal" @click="addLog">Add Log</v-btn>
                     </v-form>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
