@@ -11,11 +11,11 @@ export default {
 	},
 
 	deleteProduct(id) {
-		return axios.delete(`/api/delete/${id}`)
+		return axios.delete(`/api/product/${id}`)
 	},
 
 	updateProductQty(name, qty) {
-		return axios.patch(`/api/products?${name}=${qty}`)
+		return axios.patch(`/api/product?${name}=${qty}`)
 	},
 
 	addLog(l) {
