@@ -76,4 +76,20 @@ app.delete('/api/product/:id', async (c) => {
 	return c.json({ ok })
 })
 
+app.get('/api/logs')
+app.post('/api/log', async (c) => {
+	const body = await c.req.json()
+	console.log(body)
+
+	const resp = await c.env.DB.prepare(
+		`INSERT INTO Logs (Date, Subject, Tags, Notes) VALUES (?, ?, ?, ?) RETURNING *`,
+	)
+		.bind(body.date, body.subject, body.tags, body.notes)
+		.run()
+
+	console.log(resp.results)
+	const ok = resp.success
+	return c.json({ ok })
+})
+
 export default app

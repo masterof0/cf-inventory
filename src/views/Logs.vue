@@ -4,6 +4,7 @@ import { VDateInput } from 'vuetify/labs/VDateInput'
 import LoginButton from '@/components/LoginButton.vue'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
 import { useDate } from 'vuetify'
+import d1Axios from '@/services/d1Axios'
 
 const log = ref({})
 const date = useDate();
@@ -11,7 +12,11 @@ const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'main
 
 const addLog = () => {
     const formattedDate = date.format(log.date, 'fullDateTime');
-    console.log(formattedDate);
+
+    log.value.date = formattedDate
+    log.value.tags = JSON.stringify(log.value.tags)
+
+    d1Axios.addLog(log.value).catch(error => { console.error(error) })
 }
 
 </script>

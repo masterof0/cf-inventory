@@ -19,6 +19,6 @@ export default {
 	},
 
 	addLog(l) {
-		return axios.post('/api/logs', l)
+		return axios.post('/api/log', l)
 	},
 }
