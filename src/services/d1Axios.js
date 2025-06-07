@@ -6,7 +6,7 @@ export default {
 	},
 
 	addEditProduct(p) {
-		return axios.patch('/api/product', p)
+		return axios.put('/api/product', p)
 	},
 
 	deleteProduct(id) {

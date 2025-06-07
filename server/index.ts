@@ -25,7 +25,7 @@ app.patch('/api/products', async (c) => {
 	return new Response(null, { status: 200 })
 })
 
-app.patch('/api/product', async (c) => {
+app.put('/api/product', async (c) => {
 	const body = await c.req.json()
 
 	if (typeof body.ID == 'number') {
