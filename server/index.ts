@@ -15,7 +15,7 @@ app.get('/api/products', async (c) => {
 })
 
 // ToDo update to be a batch function
-app.put('/api/products', async (c) => {
+app.patch('/api/products', async (c) => {
 	const query = c.req.query()
 	for (const [key, value] of Object.entries(query)) {
 		await c.env.DB.prepare('UPDATE NxStage SET Qty = ? WHERE Name = ?')
@@ -25,13 +25,13 @@ app.put('/api/products', async (c) => {
 	return new Response(null, { status: 200 })
 })
 
-app.post('/api/product', async (c) => {
+app.patch('/api/product', async (c) => {
 	const body = await c.req.json()
 
 	if (typeof body.ID == 'number') {
 		const resp = await c.env.DB.prepare(
 			`UPDATE NxStage
-      SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`
+      SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`,
 		)
 			.bind(
 				body.PartNum,
@@ -39,7 +39,7 @@ app.post('/api/product', async (c) => {
 				body.Description,
 				body.Qty,
 				body.BoxQty,
-				body.ID
+				body.ID,
 			)
 			.run()
 
@@ -50,15 +50,9 @@ app.post('/api/product', async (c) => {
 	}
 
 	const resp = await c.env.DB.prepare(
-		`INSERT INTO NxStage (PartNum, Name, Description, Qty, BoxQty) VALUES (?, ?, ?, ?, ?) RETURNING *`
+		`INSERT INTO NxStage (PartNum, Name, Description, Qty, BoxQty) VALUES (?, ?, ?, ?, ?) RETURNING *`,
 	)
-		.bind(
-            body.PartNum, 
-            body.Name, 
-            body.Description, 
-            body.Qty, 
-            body.BoxQty
-        )
+		.bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty)
 		.run()
 
 	// return new Response(null, { status: 200 });
@@ -71,7 +65,7 @@ app.delete('/api/delete/:id', async (c) => {
 	const id = await c.req.param('id')
 
 	const resp = await c.env.DB.prepare(
-		`DELETE FROM NxStage WHERE ID = ? RETURNING *`
+		`DELETE FROM NxStage WHERE ID = ? RETURNING *`,
 	)
 		.bind(id)
 		.run()
