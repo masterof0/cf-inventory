@@ -11,7 +11,7 @@ const date = useDate();
 const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
 
 const addLog = () => {
-    const formattedDate = date.format(log.date, 'fullDateTime');
+    const formattedDate = date.format(log.date, 'fullDateTime')
 
     log.value.date = formattedDate
     log.value.tags = JSON.stringify(log.value.tags)

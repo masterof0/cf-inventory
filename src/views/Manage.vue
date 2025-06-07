@@ -144,7 +144,7 @@ const decQty = (index) => {
 	</div>
 </template>
 
-<style>
+<style scoped>
 .v-icon {
 	margin: 5px;
 }
