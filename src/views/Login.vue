@@ -59,28 +59,26 @@ const logout = async () => {
 </script>
 
 <template>
-  <div class="w-xl">
-    <v-container>
-      <v-card>
-        <v-toolbar color="blue"><v-toolbar-title>Login</v-toolbar-title></v-toolbar>
-        <p :hidden="success" class="text-red">Incorrect username or password</p>
-      </v-card>
-      <v-card-text>
-        <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
-        <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
-      </v-card-text>
-      <v-row align="center">
-        <v-col cols="4" :hidden="authenticated">
-          <v-btn rounded="xl" variant="tonal" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
-          <!-- <v-icon :icon="mdiLogin" @click="login"></v-icon> -->
-        </v-col>
-        <v-col cols="4" :hidden="!authenticated">
-          <v-btn rounded="xl" variant="tonal" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
-          <!-- <v-icon :icon="mdiLogout" @click=""></v-icon> -->
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container width="500">
+    <v-card>
+      <v-toolbar color="blue"><v-toolbar-title class="text-h5">Login</v-toolbar-title></v-toolbar>
+      <p :hidden="success" class="text-red">Incorrect username or password</p>
+    </v-card>
+    <v-card-text>
+      <v-text-field v-model="account.email" label="email" name="email" autocomplete="on"></v-text-field>
+      <v-text-field v-model="account.password" type="password" label="password" name="password"></v-text-field>
+    </v-card-text>
+    <v-row align="center">
+      <v-col cols="4" :hidden="authenticated">
+        <v-btn rounded="xl" variant="tonal" :prepend-icon="mdiLogin" @click="login">Login</v-btn>
+        <!-- <v-icon :icon="mdiLogin" @click="login"></v-icon> -->
+      </v-col>
+      <v-col cols="4" :hidden="!authenticated">
+        <v-btn rounded="xl" variant="tonal" :append-icon="mdiLogout" @click="logout">Logout</v-btn>
+        <!-- <v-icon :icon="mdiLogout" @click=""></v-icon> -->
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style></style>

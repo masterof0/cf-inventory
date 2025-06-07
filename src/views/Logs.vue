@@ -29,7 +29,7 @@ const addLog = () => {
                 </v-toolbar> -->
         <v-expansion-panels>
             <v-expansion-panel>
-                <v-expansion-panel-title class="toolbar rounded=t=lg text-h4" :expand-icon="mdiFileDocumentPlus"
+                <v-expansion-panel-title class="toolbar rounded=t=lg text-h5" :expand-icon="mdiFileDocumentPlus"
                     :collapse-icon="mdiFileDocumentMinus">
                     Logs
                 </v-expansion-panel-title>
