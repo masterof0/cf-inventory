@@ -61,7 +61,7 @@ const deleteProduct = (p) => {
 
 const writeChanges = () => {
 	products.value.forEach(async product => {
-		d1Axios.updateProducts(product.Name, product.Qty)
+		d1Axios.updateProductQty(product.Name, product.Qty)
 	});
 	changes.value = false
 }
