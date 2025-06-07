@@ -5,6 +5,7 @@ export default {
 		return axios.get('/api/products')
 	},
 
+	// split between post and put
 	addEditProduct(p) {
 		return axios.put('/api/product', p)
 	},
@@ -15,5 +16,9 @@ export default {
 
 	updateProductQty(name, qty) {
 		return axios.patch(`/api/products?${name}=${qty}`)
+	},
+
+	addLog(l) {
+		return axios.post('/api/logs', l)
 	},
 }

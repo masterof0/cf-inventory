@@ -3,12 +3,15 @@ import { ref } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 import LoginButton from '@/components/LoginButton.vue'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
+import { useDate } from 'vuetify'
 
 const log = ref({})
+const date = useDate();
 const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
 
 const addLog = () => {
-    console.log(log.value);
+    const formattedDate = date.format(log.date, 'fullDateTime');
+    console.log(formattedDate);
 }
 
 </script>
