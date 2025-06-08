@@ -52,14 +52,14 @@ ToDo authenticate prior to adding logs -->
                         Logs
                     </v-expansion-panel-title>
                     <v-expansion-panel-text>
-                        <v-form @submit.prevent="">
+                        <v-form @submit.prevent="addLog">
                             <VDateInput v-model="log.date" label="Select Date" prepend-icon=""
                                 prepend-inner-icon="$calendar" max-width="300" clearable></VDateInput>
                             <v-text-field v-model="log.subject" label="Subject"></v-text-field>
                             <v-combobox chips multiple v-model="log.tags" label="Tags" :items='items' clearable
                                 hide-selected></v-combobox>
                             <v-textarea v-model="log.notes" label="Notes" auto-grow></v-textarea>
-                            <v-btn class="btn rounded-pill" variant="tonal" @click="addLog">Add Log</v-btn>
+                            <v-btn class="btn rounded-pill" variant="tonal" type="submit">Add Log</v-btn>
                         </v-form>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
