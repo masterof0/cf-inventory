@@ -31,7 +31,7 @@ const router = createRouter({
 			redirect: '/log/latest',
 		},
 		{
-			path: '/log/:id',
+			path: '/log/:id(latest|\\d+)',
 			name: 'Log',
 			component: Log,
 		},
