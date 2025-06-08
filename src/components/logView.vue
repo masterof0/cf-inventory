@@ -1,7 +1,7 @@
 <script setup>
 
 defineProps({
-    log: {
+    logs: {
         type: Object,
         required: true
     }
@@ -10,7 +10,12 @@ defineProps({
 </script>
 
 <template>
-    <h3>{{ log }}</h3>
+    <v-card class="mt-4" v-for="log in logs" height="250">
+        <v-card-title class="toolbar text-h5">{{ log.Subject }}</v-card-title>
+        <v-card-subtitle class="toolbar">{{ log.Date }}</v-card-subtitle>
+        <v-card-text>{{ log.Notes }}</v-card-text>
+    </v-card>
+    {{ logs }}
 </template>
 
 <style scoped></style>
