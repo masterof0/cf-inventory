@@ -30,7 +30,7 @@ export default {
 		return axios.post('/api/log', l)
 	},
 
-	updateLog(p) {
-		return axios.put(`/api/log/${p.ID}`, p)
+	updateLog(l) {
+		return axios.put(`/api/log/${l.ID}`, l)
 	},
 }

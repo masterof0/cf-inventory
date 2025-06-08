@@ -32,7 +32,7 @@ app.put('/api/product', async (c) => {
 	if (typeof body.ID == 'number') {
 		const resp = await c.env.DB.prepare(
 			`UPDATE NxStage
-      SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`,
+      SET PartNum = ?, Name = ?, Tags = ?, Notes = ?, BoxQty = ? WHERE ID = ? RETURNING *`,
 		)
 			.bind(
 				body.PartNum,
@@ -118,6 +118,22 @@ app.post('/api/log', async (c) => {
 	const log = resp.results
 	console.log(log)
 	return c.json(log)
+})
+
+app.put('/api/log/:id', async (c) => {
+	const id = await c.req.param('id')
+	const body = await c.req.json()
+
+	const resp = await c.env.DB.prepare(
+		`UPDATE Logs
+	  SET Date = ?, Subject = ?, Tags = ?, Notes = ? WHERE ID = ? RETURNING *`,
+	)
+		.bind(body.Date, body.Subject, body.Tags, body.Notes, body.ID)
+		.run()
+
+	console.log(resp.results)
+	const ok = resp.success
+	return c.json({ ok })
 })
 
 export default app

@@ -34,7 +34,6 @@ const redirect = (id) => {
         </v-card-item>
         <v-card-text>{{ log.Notes }}</v-card-text>
     </v-card>
-    {{ logs }}
 </template>
 
 <style scoped></style>

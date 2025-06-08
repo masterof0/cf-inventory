@@ -1,11 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 import d1Axios from '@/services/d1Axios'
+import { useDate } from 'vuetify'
 
 const log = ref(null)
 const route = useRoute()
+const router = useRouter()
+const date = useDate()
 const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
 
 onMounted(async () => {
@@ -28,7 +31,18 @@ const getLog = (id) => {
 }
 
 const editLog = () => {
-    console.log('wow!')
+    const formattedDate = date.format(log.date, 'fullDateTime')
+
+    log.value.Date = formattedDate
+    log.value.Tags = JSON.stringify(log.value.Tags)
+
+    try {
+        d1Axios.updateLog(log.value).then(() => {
+            router.push("/logs")
+        })
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 </script>
@@ -48,7 +62,7 @@ const editLog = () => {
                     <v-combobox chips multiple v-model="log.Tags" label="Tags" :items='items' clearable hide-selected
                         v-if="log"></v-combobox>
                     <v-textarea v-model="log.Notes" label="Notes" auto-grow></v-textarea>
-                    <v-btn class="btn rounded-pill" variant="tonal" type="submit">Edit Log</v-btn>
+                    <v-btn class="btn rounded-pill" variant="tonal" type="submit">Update Log</v-btn>
                 </v-form>
             </v-card-text>
         </v-card>
