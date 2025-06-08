@@ -52,6 +52,8 @@ ToDo authenticate prior to adding logs -->
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>
+    </v-container>
+    <v-container>
         <LoginButton />
     </v-container>
 </template>
