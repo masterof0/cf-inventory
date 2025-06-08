@@ -78,6 +78,18 @@ app.delete('/api/product/:id', async (c) => {
 
 app.get('/api/log/:id', async (c) => {
 	const id = await c.req.param('id')
+
+	if (id === 'latest') {
+		const resp = await c.env.DB.prepare(
+			`SELECT * FROM Logs ORDER BY ID DESC LIMIT 1`,
+		).run()
+
+		const l = resp.results
+		console.log(resp.results)
+
+		return c.json(l)
+	}
+
 	const resp = await c.env.DB.prepare(`SELECT * FROM logs WHERE id = ?`)
 		.bind(id)
 		.run()

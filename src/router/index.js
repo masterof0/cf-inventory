@@ -27,6 +27,10 @@ const router = createRouter({
 			meta: { requiresAuth: true },
 		},
 		{
+			path: '/log',
+			redirect: '/log/latest',
+		},
+		{
 			path: '/log/:id',
 			name: 'Log',
 			component: Log,
