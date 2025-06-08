@@ -102,7 +102,9 @@ app.get('/api/log/:id', async (c) => {
 app.get('/api/logs', async (c) => {
 	const resp = await c.env.DB.prepare('select * from logs;').all()
 	const logs = resp.results
-
+	for (const element of logs) {
+		element.Tags = JSON.parse(element.Tags)
+	}
 	return c.json(logs)
 })
 
