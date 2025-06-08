@@ -27,7 +27,7 @@ const getLog = (id) => {
 
 <template>
     <div class="w-xl">
-        <logView v-if="log" :logs="log" :hidden=false />
+        <logView v-if="log" :logs="log" :hidden=true />
     </div>
 
 </template>
