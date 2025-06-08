@@ -29,11 +29,13 @@ const router = createRouter({
 		{
 			path: '/log',
 			redirect: '/log/latest',
+			meta: { requiresAuth: true },
 		},
 		{
 			path: '/log/:id(latest|\\d+)',
 			name: 'Log',
 			component: Log,
+			meta: { requiresAuth: true },
 		},
 		{
 			path: '/logs',
