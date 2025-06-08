@@ -1,14 +1,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import logView from '@/components/logView.vue'
+import { VDateInput } from 'vuetify/labs/VDateInput'
 import d1Axios from '@/services/d1Axios'
 
 const log = ref(null)
 const route = useRoute()
+const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
 
-onMounted(() => {
-    getLog(route.params.id)
+onMounted(async () => {
+    await getLog(route.params.id)
+    // console.log(logs.value)
+
 })
 
 const getLog = (id) => {
@@ -16,18 +19,39 @@ const getLog = (id) => {
     try {
         d1Axios.getLog(id)
             .then(response => {
-                log.value = response.data
+                log.value = response.data[0]
+                log.value.Tags = JSON.parse(log.value.Tags)
             })
     } catch (error) {
         console.error(error)
     }
 }
 
+const editLog = () => {
+    console.log('wow!')
+}
+
 </script>
 
 <template>
     <div class="w-xl">
-        <logView v-if="log" :logs="log" :hidden=true />
+        <v-card v-if="log">
+            <v-card-item class="toolbar">
+                <v-card-title class="toolbar text-h5">{{ log.Subject }}</v-card-title>
+                <v-card-subtitle class="toolbar">{{ log.Date }}</v-card-subtitle>
+            </v-card-item>
+            <v-card-text>
+                <v-form @submit.prevent="editLog">
+                    <VDateInput v-model="log.Date" label="Select Date" prepend-icon="" prepend-inner-icon="$calendar"
+                        max-width="300" clearable></VDateInput>
+                    <v-text-field v-model="log.Subject" label="Subject" v-if="log"></v-text-field>
+                    <v-combobox chips multiple v-model="log.Tags" label="Tags" :items='items' clearable hide-selected
+                        v-if="log"></v-combobox>
+                    <v-textarea v-model="log.Notes" label="Notes" auto-grow></v-textarea>
+                    <v-btn class="btn rounded-pill" variant="tonal" type="submit">Edit Log</v-btn>
+                </v-form>
+            </v-card-text>
+        </v-card>
     </div>
 
 </template>
