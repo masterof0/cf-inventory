@@ -22,7 +22,7 @@ const addLog = () => {
     log.value.date = formattedDate
     log.value.tags = JSON.stringify(log.value.tags)
 
-    d1Axios.addLog(log.value).catch(error => { console.error(error) })
+    d1Axios.addLog(log.value).then(() => { log.value = {} }).catch(error => { console.error(error) })
 }
 
 const getLogs = () => {
