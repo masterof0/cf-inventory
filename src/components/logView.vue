@@ -23,7 +23,7 @@ const redirect = (id) => {
 </script>
 
 <template>
-    <v-card class="mt-4" v-for="log in logs">
+    <v-card class="mt-4 mx-auto" v-for="log in logs">
         <v-card-item class="toolbar">
             <template v-slot:append>
                 <v-icon :icon="mdiFileDocumentArrowRightOutline" :hidden="hidden" @click="redirect(log.ID)"></v-icon>
@@ -32,12 +32,13 @@ const redirect = (id) => {
             <v-card-subtitle class="toolbar">{{ log.Date }}</v-card-subtitle>
         </v-card-item>
         <v-card-text>
-            <v-row>
-                <v-chip class="chip mx-1 mt-5" v-for="tag in log.Tags">{{ tag }}</v-chip>
-            </v-row>
-            <v-row class="text-base">
-                {{ log.Notes }}
-            </v-row>
+            <div>
+                <v-chip class="chip mx-1 my-5" v-for="tag in log.Tags">{{ tag }}</v-chip>
+            </div>
+            <div>
+                <v-textarea v-model="log.Notes" variant="solo" rows="4" no-resize flat readonly>
+                </v-textarea>
+            </div>
         </v-card-text>
     </v-card>
 </template>
