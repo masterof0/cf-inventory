@@ -29,4 +29,8 @@ export default {
 	addLog(l) {
 		return axios.post('/api/log', l)
 	},
+
+	updateLog(p) {
+		return axios.put(`/api/log/${p.ID}`, p)
+	},
 }
