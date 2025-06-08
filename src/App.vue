@@ -15,7 +15,7 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
   <div class="flex justify-center">
-    <div class="flex w-3xl justify-items-center">
+    <div class="w-3xl justify-items-center">
       <RouterView />
     </div>
   </div>
