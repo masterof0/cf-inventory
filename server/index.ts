@@ -76,6 +76,17 @@ app.delete('/api/product/:id', async (c) => {
 	return c.json({ ok })
 })
 
+app.get('/api/log/:id', async (c) => {
+	const id = await c.req.param('id')
+	const resp = await c.env.DB.prepare(`SELECT * FROM logs WHERE id = ?`)
+		.bind(id)
+		.run()
+	const l = resp.results
+	console.log(resp.results)
+
+	return c.json(l)
+})
+
 app.get('/api/logs', async (c) => {
 	const resp = await c.env.DB.prepare('select * from logs;').all()
 	const logs = resp.results
@@ -92,9 +103,9 @@ app.post('/api/log', async (c) => {
 		.bind(body.date, body.subject, body.tags, body.notes)
 		.run()
 
-	console.log(resp.results)
-	const ok = resp.success
-	return c.json({ ok })
+	const log = resp.results
+	console.log(log)
+	return c.json(log)
 })
 
 export default app

@@ -3,6 +3,7 @@ import { supabase } from '@/services/supabase'
 import { useUserStore } from '@/stores/userStore'
 import Products from '@/views/Products.vue'
 import Manage from '@/views/Manage.vue'
+import Log from '@/views/Log.vue'
 import Logs from '@/views/Logs.vue'
 import Login from '@/views/Login.vue'
 
@@ -24,6 +25,11 @@ const router = createRouter({
 			name: 'Manage',
 			component: Manage,
 			meta: { requiresAuth: true },
+		},
+		{
+			path: '/log/:id',
+			name: 'Log',
+			component: Log,
 		},
 		{
 			path: '/logs',
