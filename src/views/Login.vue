@@ -3,11 +3,11 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import { supabase } from '@/services/supabase'
 import { mdiLogin, mdiLogout } from '@mdi/js';
-import { useUserStore } from '@/stores/userStore'
+import { useInventoryStore } from '@/stores/inventoryStore'
 
 const router = useRouter();
 const success = ref(true)
-const store = useUserStore()
+const store = useInventoryStore()
 const authenticated = ref(false)
 
 const account = reactive({
@@ -23,6 +23,7 @@ onMounted(async () => {
   } catch (error) {
     console.error(error)
   }
+
 })
 
 const login = async () => {

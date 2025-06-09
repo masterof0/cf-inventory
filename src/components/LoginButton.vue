@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/userStore'
+import { useInventoryStore } from '@/stores/inventoryStore'
 import { supabase } from '@/services/supabase'
 import { mdiLogin, mdiLogout } from '@mdi/js';
 
 const router = useRouter()
-const store = useUserStore()
+const store = useInventoryStore()
 const authenticated = ref(false)
 
 onMounted(async () => {

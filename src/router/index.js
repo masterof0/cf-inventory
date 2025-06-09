@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '@/services/supabase'
-import { useUserStore } from '@/stores/userStore'
+import { useInventoryStore } from '@/stores/inventoryStore'
 import Products from '@/views/Products.vue'
 import Manage from '@/views/Manage.vue'
 import Log from '@/views/Log.vue'
@@ -55,7 +55,7 @@ const router = createRouter({
 // validate autentication
 router.beforeEach(async (to, from, next) => {
 	const user = await supabase.auth.getSession()
-	const store = useUserStore()
+	const store = useInventoryStore()
 	if (to.meta.requiresAuth && user.data.session) {
 		await store.addUser(user.data.session.user)
 		return next()
