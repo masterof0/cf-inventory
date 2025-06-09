@@ -25,9 +25,10 @@ const login = () => {
 
 const logout = async () => {
     await supabase.auth.signOut()
-        .then(
+        .then(() => {
             authenticated.value = false
-        ).catch(error => {
+            router.push({ name: "Products"})
+        }).catch(error => {
             console.error(error)
         })
 }
