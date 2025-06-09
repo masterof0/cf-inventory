@@ -40,12 +40,11 @@ const login = async () => {
         return
       }
       success.value = false
+      account.password = ""
     })
     .catch(error => {
       console.error(error)
     })
-
-  account.password = ""
 }
 
 const logout = async () => {
