@@ -14,6 +14,7 @@ const date = useDate()
 const store = useInventoryStore()
 const items = ref()
 const authenticated = ref(false)
+const panel = ref()
 
 onMounted(() => {
     getLogs()
@@ -35,6 +36,7 @@ const addLog = () => {
 
     d1Axios.addLog(log.value)
         .then(() => {
+            closePanel()
             log.value = {}
             getLogs()
         })
@@ -53,6 +55,10 @@ const getLogs = () => {
     }
 }
 
+const closePanel = () => {
+    panel.value = null;
+}
+
 </script>
 
 <!-- ToDo allow viewing logs without authentication
@@ -61,7 +67,7 @@ ToDo authenticate prior to adding logs -->
 <template>
     <div class="w-xl">
         <v-container>
-            <v-expansion-panels>
+            <v-expansion-panels v-model="panel">
                 <v-expansion-panel>
                     <v-expansion-panel-title class="toolbar rounded=t=lg text-h5" :expand-icon="mdiFileDocumentPlus"
                         :collapse-icon="mdiFileDocumentMinus">
