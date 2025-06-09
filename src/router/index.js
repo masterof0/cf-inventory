@@ -41,7 +41,7 @@ const router = createRouter({
 			path: '/logs',
 			name: 'Logs',
 			component: Logs,
-			meta: { requiresAuth: true },
+			// meta: { requiresAuth: true },
 		},
 		{
 			path: '/:pathMatch(.*)*',

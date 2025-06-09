@@ -13,11 +13,19 @@ const logs = ref()
 const date = useDate()
 const store = useInventoryStore()
 const items = ref()
+const authenticated = ref(false)
 
 onMounted(() => {
     getLogs()
+    setAuth()
     items.value = store.getTags
 })
+
+const setAuth = async () => {
+    if (store.getUser) {
+        authenticated.value = true
+    }
+}
 
 const addLog = () => {
     const formattedDate = date.format(log.date, 'fullDateTime')
@@ -59,7 +67,10 @@ ToDo authenticate prior to adding logs -->
                         :collapse-icon="mdiFileDocumentMinus">
                         Logs
                     </v-expansion-panel-title>
-                    <v-expansion-panel-text>
+                    <v-expansion-panel-text :hidden="authenticated">
+                        Please log in to add new log
+                    </v-expansion-panel-text>
+                    <v-expansion-panel-text :hidden="!authenticated">
                         <v-form @submit.prevent="addLog">
                             <VDateInput v-model="log.date" label="Select Date" prepend-icon=""
                                 prepend-inner-icon="$calendar" max-width="300" clearable></VDateInput>
