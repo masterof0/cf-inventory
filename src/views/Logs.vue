@@ -25,7 +25,12 @@ const addLog = () => {
     log.value.date = formattedDate
     log.value.tags = JSON.stringify(log.value.tags)
 
-    d1Axios.addLog(log.value).then(() => { log.value = {} }).catch(error => { console.error(error) })
+    d1Axios.addLog(log.value)
+        .then(() => {
+            log.value = {}
+            getLogs()
+        })
+        .catch(error => { console.error(error) })
 }
 
 const getLogs = () => {
@@ -64,13 +69,6 @@ ToDo authenticate prior to adding logs -->
                             <v-textarea v-model="log.notes" label="Notes" auto-grow></v-textarea>
                             <v-btn class="btn rounded-pill" variant="tonal" type="submit">Add Log</v-btn>
                         </v-form>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
-                        <ul>https://vuetifyjs.com/en/components/expansion-panels/</ul>
-                        <ul>https://vuetifyjs.com/en/components/date-inputs</ul>
-                        <ul>https://vuetifyjs.com/en/components/combobox</ul>
-                        <ul>https://vuetifyjs.com/en/components/textareas</ul>
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
