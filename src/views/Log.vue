@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { VDateInput } from 'vuetify/labs/VDateInput'
+import { useInventoryStore } from '@/stores/inventoryStore'
 import d1Axios from '@/services/d1Axios'
 import { useDate } from 'vuetify'
 
@@ -9,12 +10,12 @@ const log = ref(null)
 const route = useRoute()
 const router = useRouter()
 const date = useDate()
-const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
+const store = useInventoryStore()
+const items = ref()
 
 onMounted(async () => {
     await getLog(route.params.id)
-    // console.log(logs.value)
-
+    items.value = store.getTags
 })
 
 const getLog = (id) => {

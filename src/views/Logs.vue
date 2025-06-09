@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 import LoginButton from '@/components/LoginButton.vue'
+import { useInventoryStore } from '@/stores/inventoryStore'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
 import { useDate } from 'vuetify'
 import d1Axios from '@/services/d1Axios'
@@ -9,11 +10,13 @@ import logView from '@/components/logView.vue'
 
 const log = ref({})
 const logs = ref()
-const date = useDate();
-const items = ['bleeding', 'blood pressure', 'cycler', 'dialysis', 'labs', 'maintenance', 'pak', 'pureflow', 'sak', 'setup']
+const date = useDate()
+const store = useInventoryStore()
+const items = ref()
 
 onMounted(() => {
     getLogs()
+    items.value = store.getTags
 })
 
 const addLog = () => {
