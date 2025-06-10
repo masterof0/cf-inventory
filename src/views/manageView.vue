@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
 import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
-import loginButton from '@/components/loginButton.vue'
+import loginButton from '@/components/LoginButton.vue'
 
 const products = ref(null)
 const selectedItem = ref(null)
@@ -111,7 +111,6 @@ const decQty = (index) => {
 			<loginButton />
 		</v-container>
 
-		</br>
 
 		<!-- ToDo move this to a modal -->
 		<div class="w-xl">

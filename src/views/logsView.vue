@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
-import loginButton from '@/components/loginButton.vue'
+import loginButton from '@/components/LoginButton.vue'
 import { useInventoryStore } from '@/stores/inventoryStore'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
 import { useDate } from 'vuetify'
