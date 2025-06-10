@@ -4,6 +4,7 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import json from '@eslint/json'
 import { defineConfig } from 'eslint/config'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
 	{
@@ -35,4 +36,5 @@ export default defineConfig([
 			'max-len': ['error', { code: 120 }],
 		},
 	},
+	eslintPluginPrettierRecommended,
 ])
