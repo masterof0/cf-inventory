@@ -73,9 +73,9 @@ const swapUpdate = () => {
             <v-card-text>
                 <v-form @submit.prevent="editLog" :readonly="update">
                     <VDateInput v-model="log.Date" label="Select Date" prepend-icon="" prepend-inner-icon="$calendar"
-                        max-width="300" :readonly="update" clearable></VDateInput>
+                        max-width="300" :readonly="update"></VDateInput>
                     <v-text-field v-model="log.Subject" label="Subject" v-if="log"></v-text-field>
-                    <v-combobox chips multiple v-model="log.Tags" label="Tags" :items='items' clearable hide-selected
+                    <v-combobox chips multiple v-model="log.Tags" label="Tags" :items='items' hide-selected
                         v-if="log"></v-combobox>
                     <v-textarea v-model="log.Notes" label="Notes" auto-grow></v-textarea>
                     <v-btn class="btn rounded-pill" variant="tonal" type="submit" :disabled="update">Update Log</v-btn>
