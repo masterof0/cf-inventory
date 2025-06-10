@@ -1,5 +1,5 @@
 <script setup>
-import LoginButton from '@/components/LoginButton.vue'
+import loginButton from '@/components/LoginButton.vue'
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
 
@@ -32,7 +32,7 @@ onMounted(async () => {
         <v-row class="lastCell rounded-b-lg align-center">
             <v-col class="center" cols="3"></v-col>
         </v-row>
-        <LoginButton />
+        <loginButton />
     </v-container>
 </template>
 

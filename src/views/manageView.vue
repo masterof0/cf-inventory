@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
 import { mdiPlusCircle, mdiMinusCircle } from '@mdi/js'
-import LoginButton from '@/components/LoginButton.vue'
+import loginButton from '@/components/loginButton.vue'
 
 const products = ref(null)
 const selectedItem = ref(null)
@@ -108,7 +108,7 @@ const decQty = (index) => {
 					<v-btn class="btn rounded-pill" :disabled="!changes" @click="writeChanges">Update Quantities</v-btn>
 				</v-col>
 			</v-row>
-			<LoginButton />
+			<loginButton />
 		</v-container>
 
 		</br>
