@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
-import LoginButton from '@/components/LoginButton.vue'
+import loginButton from '@/components/loginButton.vue'
 import { useInventoryStore } from '@/stores/inventoryStore'
 import { mdiFileDocumentPlus, mdiFileDocumentMinus } from '@mdi/js'
 import { useDate } from 'vuetify'
 import d1Axios from '@/services/d1Axios'
-import logView from '@/components/logView.vue'
+import logComponent from '@/components/logComponent.vue'
 
 const log = ref({})
 const logs = ref()
@@ -89,10 +89,10 @@ ToDo authenticate prior to adding logs -->
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
-            <logView v-if="logs" :logs="logs" />
+            <logComponent v-if="logs" :logs="logs" />
         </v-container>
         <v-container>
-            <LoginButton />
+            <loginButton />
         </v-container>
     </div>
 </template>
