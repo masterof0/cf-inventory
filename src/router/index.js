@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '@/services/supabase'
 import { useInventoryStore } from '@/stores/inventoryStore'
-import Products from '@/views/Products.vue'
-import Manage from '@/views/Manage.vue'
-import Log from '@/views/Log.vue'
-import Logs from '@/views/Logs.vue'
-import Login from '@/views/Login.vue'
+import productsView from '@/views/productsView.vue'
+import manageView from '@/views/manageView.vue'
+import logView from '@/views/logView.vue'
+import logsView from '@/views/logsView.vue'
+import loginView from '@/views/loginView.vue'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,17 +13,17 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'Products',
-			component: Products,
+			component: productsView,
 		},
 		{
 			path: '/login',
 			name: 'Login',
-			component: Login,
+			component: loginView,
 		},
 		{
 			path: '/manage',
 			name: 'Manage',
-			component: Manage,
+			component: manageView,
 			meta: { requiresAuth: true },
 		},
 		{
@@ -34,14 +34,14 @@ const router = createRouter({
 		{
 			path: '/log/:id(latest|\\d+)',
 			name: 'Log',
-			component: Log,
+			component: logView,
 			props: true,
 			meta: { requiresAuth: true },
 		},
 		{
 			path: '/logs',
 			name: 'Logs',
-			component: Logs,
+			component: logsView,
 			// meta: { requiresAuth: true },
 		},
 		{

@@ -1,5 +1,5 @@
 <script setup>
-import loginButton from '@/components/loginButton.vue'
+import loginButton from '@/components/LoginButton.vue'
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
 
