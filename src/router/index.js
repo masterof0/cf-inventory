@@ -47,7 +47,7 @@ const router = createRouter({
 		{
 			path: '/:pathMatch(.*)*',
 			name: 'NotFound',
-			component: () => import('@/views/404.vue'),
+			component: () => import('@/views/404view.vue'),
 			// component: NotFound,
 		},
 	],
@@ -65,9 +65,7 @@ router.beforeEach(async (to, from, next) => {
 		await store.clearSession()
 		return next('/login')
 	} else {
-		user.data.session
-			? store.addUser(user.data.session.user)
-			: store.clearSession()
+		user.data.session ? store.addUser(user.data.session.user) : store.clearSession()
 	}
 	next()
 })
