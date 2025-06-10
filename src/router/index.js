@@ -35,6 +35,7 @@ const router = createRouter({
 			path: '/log/:id(latest|\\d+)',
 			name: 'Log',
 			component: Log,
+			props: true,
 			meta: { requiresAuth: true },
 		},
 		{

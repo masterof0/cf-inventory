@@ -1,20 +1,27 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 import { useInventoryStore } from '@/stores/inventoryStore'
 import d1Axios from '@/services/d1Axios'
 import { useDate } from 'vuetify'
 
 const log = ref(null)
-const route = useRoute()
 const router = useRouter()
 const date = useDate()
 const store = useInventoryStore()
 const items = ref()
 
+const props = defineProps({
+    id: {
+        type: String,
+        required: true
+    }
+})
+
+
 onMounted(async () => {
-    await getLog(route.params.id)
+    await getLog(props.id)
     items.value = store.getTags
 })
 
