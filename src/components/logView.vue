@@ -4,7 +4,7 @@ import { mdiFileDocumentEditOutline, mdiFileDocumentArrowRightOutline } from '@m
 
 const router = useRouter()
 
-defineProps({
+const props = defineProps({
     logs: {
         type: Object,
         required: true
@@ -23,11 +23,12 @@ const redirect = (id) => {
 </script>
 
 <template>
-    <v-card class="mt-4 mx-auto" v-for="log in logs">
+    <v-card class="mt-4 mx-auto" v-for="log in props.logs">
         <v-card-item class="toolbar">
             <template v-slot:append>
-                <v-icon :icon="mdiFileDocumentArrowRightOutline" :hidden="hidden" @click="redirect(log.ID)"></v-icon>
-                <v-icon :icon="mdiFileDocumentEditOutline" :hidden="!hidden" @click=""></v-icon></template>
+                <v-icon :icon="mdiFileDocumentArrowRightOutline" :hidden="props.hidden"
+                    @click="redirect(log.ID)"></v-icon>
+                <v-icon :icon="mdiFileDocumentEditOutline" :hidden="!props.hidden" @click=""></v-icon></template>
             <v-card-title class="toolbar text-h5">{{ log.Subject }}</v-card-title>
             <v-card-subtitle class="toolbar">{{ log.Date }}</v-card-subtitle>
         </v-card-item>
