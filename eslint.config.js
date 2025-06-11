@@ -28,7 +28,19 @@ export default defineConfig([
 		language: 'json/json',
 		extends: ['json/recommended'],
 	},
-
+	{
+		files: ['**/*.ts', '**/*.tsx'],
+		languageOptions: {
+			parser: '@typescript-eslint/parser',
+			parserOptions: {
+				project: true,
+			},
+		},
+		plugins: {
+			'@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
+		},
+		extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+	},
 	{
 		rules: {
 			'no-unused-vars': 'warn',
