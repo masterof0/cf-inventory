@@ -16,7 +16,7 @@ const props = defineProps({
 	<v-card class="mx-auto mt-4" v-for="log in props.logs" :key="log.ID">
 		<v-card-item class="toolbar">
 			<template v-slot:append>
-				<v-icon :icon="mdiFileDocumentArrowRightOutline" @click="router.push(`/log/${log.ID}`)"></v-icon>
+				<v-icon :icon="mdiFileDocumentArrowRightOutline" @click="router.push(`/logs/${log.ID}`)"></v-icon>
 			</template>
 			<v-card-title class="toolbar text-h5">{{ log.Subject }}</v-card-title>
 			<v-card-subtitle class="toolbar">{{ log.Date }}</v-card-subtitle>

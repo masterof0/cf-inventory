@@ -27,22 +27,18 @@ const router = createRouter({
 			meta: { requiresAuth: true },
 		},
 		{
-			path: '/log',
-			redirect: '/log/latest',
-			meta: { requiresAuth: true },
+			path: '/logs',
+			name: 'Logs',
+			props: true,
+			component: logsView,
+			// meta: { requiresAuth: true },
 		},
 		{
-			path: '/log/:id(latest|\\d+)',
+			path: '/logs/:id(latest|\\d+)',
 			name: 'Log',
 			component: logView,
 			props: true,
 			meta: { requiresAuth: true },
-		},
-		{
-			path: '/logs',
-			name: 'Logs',
-			component: logsView,
-			// meta: { requiresAuth: true },
 		},
 		{
 			path: '/:pathMatch(.*)*',
