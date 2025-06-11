@@ -37,7 +37,7 @@ const addLog = () => {
 	d1Axios
 		.addLog(log.value)
 		.then(() => {
-			closePanel()
+			panel.value = null
 			log.value = {}
 			getLogs()
 		})
@@ -54,10 +54,6 @@ const getLogs = () => {
 	} catch (error) {
 		console.error(error)
 	}
-}
-
-const closePanel = () => {
-	panel.value = null
 }
 </script>
 

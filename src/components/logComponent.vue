@@ -10,24 +10,20 @@ const props = defineProps({
 		required: true,
 	},
 })
-
-const redirect = (id) => {
-	router.push(`/log/${id}`)
-}
 </script>
 
 <template>
 	<v-card class="mx-auto mt-4" v-for="log in props.logs" :key="log.ID">
 		<v-card-item class="toolbar">
 			<template v-slot:append>
-				<v-icon :icon="mdiFileDocumentArrowRightOutline" @click="redirect(log.ID)"></v-icon>
+				<v-icon :icon="mdiFileDocumentArrowRightOutline" @click="router.push(`/log/${log.ID}`)"></v-icon>
 			</template>
 			<v-card-title class="toolbar text-h5">{{ log.Subject }}</v-card-title>
 			<v-card-subtitle class="toolbar">{{ log.Date }}</v-card-subtitle>
 		</v-card-item>
 		<v-card-text>
 			<div>
-				<v-chip class="chip mx-1 my-5" v-for="{ tag, index } in log.Tags" :key="index">{{ tag }}</v-chip>
+				<v-chip class="chip mx-1 my-5" v-for="(tag, index) in log.Tags" :key="index">{{ tag }}</v-chip>
 			</div>
 			<div>
 				<v-textarea v-model="log.Notes" variant="solo" rows="4" no-resize flat readonly> </v-textarea>
