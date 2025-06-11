@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
 	<div class="not-found">
 		<h1>404 - Not Found</h1>
