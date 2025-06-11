@@ -65,6 +65,7 @@ router.beforeEach(async (to, from, next) => {
 		await store.clearSession()
 		return next('/login')
 	} else {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		user.data.session ? store.addUser(user.data.session.user) : store.clearSession()
 	}
 	next()
