@@ -18,9 +18,7 @@ app.get('/api/products', async (c) => {
 app.patch('/api/product', async (c) => {
 	const query = c.req.query()
 	for (const [key, value] of Object.entries(query)) {
-		await c.env.DB.prepare('UPDATE NxStage SET Qty = ? WHERE Name = ?')
-			.bind(value, key)
-			.run()
+		await c.env.DB.prepare('UPDATE NxStage SET Qty = ? WHERE Name = ?').bind(value, key).run()
 	}
 	return new Response(null, { status: 200 })
 })
@@ -34,14 +32,7 @@ app.put('/api/product', async (c) => {
 			`UPDATE NxStage
       SET PartNum = ?, Name = ?, Tags = ?, Notes = ?, BoxQty = ? WHERE ID = ? RETURNING *`,
 		)
-			.bind(
-				body.PartNum,
-				body.Name,
-				body.Description,
-				body.Qty,
-				body.BoxQty,
-				body.ID,
-			)
+			.bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty, body.ID)
 			.run()
 
 		// return new Response(null, { status: 200 });
@@ -65,11 +56,7 @@ app.put('/api/product', async (c) => {
 app.delete('/api/product/:id', async (c) => {
 	const id = await c.req.param('id')
 
-	const resp = await c.env.DB.prepare(
-		`DELETE FROM NxStage WHERE ID = ? RETURNING *`,
-	)
-		.bind(id)
-		.run()
+	const resp = await c.env.DB.prepare(`DELETE FROM NxStage WHERE ID = ? RETURNING *`).bind(id).run()
 
 	console.log(resp.results)
 	const ok = resp.success
@@ -80,9 +67,7 @@ app.get('/api/log/:id', async (c) => {
 	const id = await c.req.param('id')
 
 	if (id === 'latest') {
-		const resp = await c.env.DB.prepare(
-			`SELECT * FROM Logs ORDER BY ID DESC LIMIT 1`,
-		).run()
+		const resp = await c.env.DB.prepare(`SELECT * FROM Logs ORDER BY ID DESC LIMIT 1`).run()
 
 		const l = resp.results
 		console.log(resp.results)
@@ -90,9 +75,7 @@ app.get('/api/log/:id', async (c) => {
 		return c.json(l)
 	}
 
-	const resp = await c.env.DB.prepare(`SELECT * FROM logs WHERE id = ?`)
-		.bind(id)
-		.run()
+	const resp = await c.env.DB.prepare(`SELECT * FROM logs WHERE id = ?`).bind(id).run()
 	const l = resp.results
 	console.log(resp.results)
 
@@ -100,7 +83,7 @@ app.get('/api/log/:id', async (c) => {
 })
 
 app.get('/api/logs', async (c) => {
-	const resp = await c.env.DB.prepare('select * from logs;').all()
+	const resp = await c.env.DB.prepare('SELECT * FROM logs ORDER BY ID DESC;').all()
 	const logs = resp.results
 	for (const element of logs) {
 		element.Tags = JSON.parse(element.Tags)
@@ -111,9 +94,7 @@ app.get('/api/logs', async (c) => {
 app.post('/api/log', async (c) => {
 	const body = await c.req.json()
 
-	const resp = await c.env.DB.prepare(
-		`INSERT INTO Logs (Date, Subject, Tags, Notes) VALUES (?, ?, ?, ?) RETURNING *`,
-	)
+	const resp = await c.env.DB.prepare(`INSERT INTO Logs (Date, Subject, Tags, Notes) VALUES (?, ?, ?, ?) RETURNING *`)
 		.bind(body.date, body.subject, body.tags, body.notes)
 		.run()
 
