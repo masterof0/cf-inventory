@@ -34,6 +34,8 @@ export default defineConfig([
 			'no-unused-vars': 'warn',
 			'no-undef': 'warn',
 			'max-len': ['error', { code: 120 }],
+			quotes: ['warn', 'single'],
+			indent: ['warn', '2'],
 		},
 	},
 	eslintPluginPrettierRecommended,
