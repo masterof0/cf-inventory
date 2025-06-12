@@ -32,7 +32,11 @@ const addLog = () => {
 	const formattedDate = date.format(log.value.Date, 'fullDateTime')
 
 	log.value.date = formattedDate
-	log.value.tags = JSON.stringify(log.value.tags)
+	if (log.value.tags) {
+		log.value.tags = JSON.stringify(log.value.tags)
+	} else {
+		log.value.tags = JSON.stringify([])
+	}
 
 	d1Axios
 		.addLog(log.value)
