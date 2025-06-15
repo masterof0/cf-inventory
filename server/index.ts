@@ -16,7 +16,6 @@ app.get('/api/products', async (c) => {
 
 // ToDo update to be a batch function
 app.patch('/api/product', async (c) => {
-	console.log('patch')
 	const query = c.req.query()
 	for (const [key, value] of Object.entries(query)) {
 		await c.env.DB.prepare('UPDATE NxStage SET Qty = ? WHERE Name = ?').bind(value, key).run()
@@ -27,7 +26,6 @@ app.patch('/api/product', async (c) => {
 // Split to post and put
 app.post('/api/product', async (c) => {
 	const body = await c.req.json()
-	console.log(body)
 
 	if (typeof body.ID == 'number') {
 		const resp = await c.env.DB.prepare(

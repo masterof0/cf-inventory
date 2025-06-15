@@ -48,6 +48,7 @@ const addEditProduct = () => {
 			console.error(error)
 		})
 	prodModel.value = {}
+	selectedItem.value = ''
 }
 
 const deleteProduct = (p) => {
