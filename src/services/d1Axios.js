@@ -10,6 +10,14 @@ export default {
 		return axios.post('/api/product', p)
 	},
 
+	addProduct(p) {
+		return axios.post('/api/product', p)
+	},
+
+	editProduct(p) {
+		return axios.put('/api/product', p)
+	},
+
 	deleteProduct(id) {
 		return axios.delete(`/api/product/${id}`)
 	},
