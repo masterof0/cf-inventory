@@ -7,7 +7,7 @@ export default {
 
 	// split between post and put
 	addEditProduct(p) {
-		return axios.put('/api/product', p)
+		return axios.post('/api/product', p)
 	},
 
 	deleteProduct(id) {
