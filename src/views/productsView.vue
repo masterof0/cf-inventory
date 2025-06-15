@@ -1,7 +1,7 @@
 <script setup>
-import loginButton from '@/components/loginButton.vue'
 import { ref, onMounted } from 'vue'
 import d1Axios from '@/services/d1Axios'
+import loginButton from '@/components/loginButton.vue'
 
 const products = ref(null)
 
