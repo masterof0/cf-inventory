@@ -40,6 +40,14 @@ const editProdModel = () => {
 	updateProdModel(result)
 }
 
+const addProduct = () => {
+	console.log('add')
+}
+
+const editProduct = () => {
+	console.log('edit')
+}
+
 const addEditProduct = () => {
 	d1Axios
 		.addEditProduct(prodModel.value)
@@ -119,33 +127,33 @@ const decQty = (index) => {
 				<v-card>
 					<v-toolbar class="toolbar"><v-toolbar-title> Add/Edit a product</v-toolbar-title></v-toolbar>
 				</v-card>
-				<v-card-text>
-					<v-select
-						v-if="products"
-						class="mb-5"
-						label="Select"
-						v-model="selectedItem"
-						:items="products"
-						item-title="Name"
-						hint="Leave blank for a new product"
-						persistent-hint
-						clearable
-						@update:modelValue="editProdModel"
-					></v-select>
-					<v-select v-else :items="[]"></v-select>
-					<v-text-field readonly v-model="prodModel.ID" label="ID"></v-text-field>
-					<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
-					<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
-					<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
-					<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
-					<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
-					<v-row class="pr-2 pl-2" justify="space-between">
-						<v-btn class="rounded-pill w-24" variant="tonal" @click="addEditProduct">{{
-							typeof prodModel.ID == 'number' ? 'Edit' : 'Add'
-						}}</v-btn>
-						<v-btn class="w-24i rounded-pill" variant="tonal" @click="deleteProduct(prodModel)">Delete</v-btn>
-					</v-row>
-				</v-card-text>
+				<form @submit.prevent="prodModel.ID ? editProduct() : addProduct()">
+					<v-card-text>
+						<v-select
+							v-if="products"
+							class="mb-5"
+							label="Select"
+							v-model="selectedItem"
+							:items="products"
+							item-title="Name"
+							hint="Leave blank for a new product"
+							persistent-hint
+							clearable
+							@update:modelValue="editProdModel"
+						></v-select>
+						<v-select v-else :items="[]"></v-select>
+						<v-text-field readonly v-model="prodModel.ID" label="ID"></v-text-field>
+						<v-text-field v-model="prodModel.PartNum" label="Part Number"></v-text-field>
+						<v-text-field v-model="prodModel.Name" label="Name"></v-text-field>
+						<v-text-field v-model="prodModel.Description" label="Description"></v-text-field>
+						<v-text-field v-model="prodModel.Qty" label="Qty"></v-text-field>
+						<v-text-field v-model="prodModel.BoxQty" label="BoxQty"></v-text-field>
+						<v-row class="pr-2 pl-2" justify="space-between">
+							<v-btn class="rounded-pill w-24" variant="tonal" type="Submit">{{ prodModel.ID ? 'Edit' : 'Add' }}</v-btn>
+							<v-btn class="w-24i rounded-pill" variant="tonal" @click="deleteProduct(prodModel)">Delete</v-btn>
+						</v-row>
+					</v-card-text>
+				</form>
 			</v-container>
 		</div>
 	</div>
