@@ -27,24 +27,26 @@ app.patch('/api/product', async (c) => {
 app.post('/api/product', async (c) => {
 	const body = await c.req.json()
 
-	if (typeof body.ID == 'number') {
-		const resp = await c.env.DB.prepare(
-			`UPDATE NxStage
-	    SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`,
-		)
-			.bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty, body.ID)
-			.run()
-
-		// return new Response(null, { status: 200 });
-		console.log(resp.results)
-		const ok = resp.success
-		return c.json({ ok })
-	}
-
 	const resp = await c.env.DB.prepare(
 		`INSERT INTO NxStage (PartNum, Name, Description, Qty, BoxQty) VALUES (?, ?, ?, ?, ?) RETURNING *`,
 	)
 		.bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty)
+		.run()
+
+	// return new Response(null, { status: 200 });
+	console.log(resp.results)
+	const ok = resp.success
+	return c.json({ ok })
+})
+
+app.put('/api/product', async (c) => {
+	const body = await c.req.json()
+
+	const resp = await c.env.DB.prepare(
+		`UPDATE NxStage
+	    SET PartNum = ?, Name = ?, Description = ?, Qty = ?, BoxQty = ? WHERE ID = ? RETURNING *`,
+	)
+		.bind(body.PartNum, body.Name, body.Description, body.Qty, body.BoxQty, body.ID)
 		.run()
 
 	// return new Response(null, { status: 200 });
