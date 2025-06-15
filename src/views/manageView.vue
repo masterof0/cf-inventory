@@ -41,16 +41,19 @@ const editProdModel = () => {
 }
 
 const addProduct = () => {
-	console.log('add')
+	d1Axios
+		.addProduct(prodModel.value)
+		.then(loadProducts())
+		.catch((error) => {
+			console.error(error)
+		})
+	prodModel.value = {}
+	selectedItem.value = ''
 }
 
 const editProduct = () => {
-	console.log('edit')
-}
-
-const addEditProduct = () => {
 	d1Axios
-		.addEditProduct(prodModel.value)
+		.editProduct(prodModel.value)
 		.then(loadProducts())
 		.catch((error) => {
 			console.error(error)

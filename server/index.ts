@@ -23,7 +23,6 @@ app.patch('/api/product', async (c) => {
 	return new Response(null, { status: 200 })
 })
 
-// Split to post and put
 app.post('/api/product', async (c) => {
 	const body = await c.req.json()
 

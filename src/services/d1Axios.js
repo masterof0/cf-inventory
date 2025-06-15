@@ -5,11 +5,6 @@ export default {
 		return axios.get('/api/products')
 	},
 
-	// split between post and put
-	addEditProduct(p) {
-		return axios.post('/api/product', p)
-	},
-
 	addProduct(p) {
 		return axios.post('/api/product', p)
 	},
