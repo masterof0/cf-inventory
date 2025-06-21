@@ -29,7 +29,7 @@ const setAuth = async () => {
 }
 
 const addLog = () => {
-	const formattedDate = date.format(log.value.Date, 'fullDateTime')
+	const formattedDate = date.format(log.value.Date, 'fullDate')
 
 	log.value.date = formattedDate
 	if (log.value.tags) {
@@ -60,9 +60,6 @@ const getLogs = () => {
 	}
 }
 </script>
-
-<!-- ToDo allow viewing logs without authentication
-ToDo authenticate prior to adding logs -->
 
 <template>
 	<div class="w-xl">

@@ -38,7 +38,7 @@ const getLog = (id) => {
 }
 
 const editLog = () => {
-	const formattedDate = date.format(log.value.date, 'fullDateTime')
+	const formattedDate = date.format(log.value.Date, 'fullDate')
 
 	log.value.Date = formattedDate
 	log.value.Tags = JSON.stringify(log.value.Tags)
