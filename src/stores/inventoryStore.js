@@ -11,6 +11,7 @@ export const useInventoryStore = defineStore('inventory', {
 			'dialysis',
 			'labs',
 			'maintenance',
+			'meds',
 			'pak',
 			'pureflow',
 			'sak',
