@@ -26,7 +26,7 @@ const props = defineProps({
 				<v-chip class="chip mx-1 my-5" v-for="(tag, index) in log.Tags" :key="index">{{ tag }}</v-chip>
 			</div>
 			<div>
-				<v-textarea v-model="log.Notes" variant="solo" rows="4" no-resize flat readonly> </v-textarea>
+				<v-textarea v-model="log.Notes" variant="solo" rows="2" no-resize flat readonly> </v-textarea>
 			</div>
 		</v-card-text>
 	</v-card>
