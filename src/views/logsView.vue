@@ -29,7 +29,7 @@ const setAuth = async () => {
 }
 
 const addLog = () => {
-	const formattedDate = date.format(log.value.Date, 'fullDate')
+	const formattedDate = date.format(log.value.date, 'fullDate')
 
 	log.value.date = formattedDate
 	if (log.value.tags) {
